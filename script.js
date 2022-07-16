@@ -4,6 +4,7 @@ roundNumber = 1;
 userWins = 0;
 computerWins = 0;
 
+// Returns random rock, scissors or paper
 function computerPlay() {
   let plays = ["rock", "paper", "scissors"];
   computerHand = plays[Math.round(Math.random() * (2 - 0) + 0)];
@@ -12,7 +13,8 @@ function computerPlay() {
   return computerHand;
 }
 
-function playRound(computerSelection, playerSelection) {
+function determineWinner(computerSelection, playerSelection) {
+    // Make all inputs title case for consistency
     computerSelection = computerSelection.toLowerCase();
     playerSelection = playerSelection.toLowerCase();
   let winner = "";
@@ -54,12 +56,13 @@ function toTitleCase(userString) {
     return titleCaseString;
 }
 
-function game() {}
 
 
 
-//Main game loop
+// START GAME LOOP
+
 while (stillPlaying) {
+
   if (roundNumber > 5) {
     if (userWins > computerWins) {
       console.log(`You won the game!`);
@@ -73,16 +76,20 @@ while (stillPlaying) {
     break;
   }
   
+  // Always display round
   console.log(`ROUND: ${roundNumber}\n`)
+
+  // Get user's choice 
   userHand = prompt("What's your play? Type 'rock', 'paper', or 'scissors': ");
   userHand = toTitleCase(userHand);
 
+  // Display computer and player choice after each hand
   console.log(`${userHand}`)
-
   computerHand = computerPlay();
   console.log(`Computer: ${computerHand}`)
 
-  let theWinner = playRound(computerHand, userHand);
+  
+  let theWinner = determineWinner(computerHand, userHand);
 
   if (theWinner === "player") {
     userWins++;
@@ -93,10 +100,12 @@ while (stillPlaying) {
     console.log(`-----COMPUTER WINS-----`);
   }
 
-  // If tie round, do the round over, don't increment it
+  // If it's a tie, don't increment round
   if (theWinner === "tie") {
     console.log(`Tie round. Both players chose ${userHand}. Run it back!`);
   } else {
-    roundNumber++;
+    roundNumber++; // Finally if it's not a tie, increment the round 
   }
+
+  // END GAME LOOP
 }
