@@ -1,0 +1,46 @@
+
+body {
+    background-image:  url("./assets/images/double-dragon-garage.png");
+    background-repeat: no-repeat;
+    background-size:contain;
+    background-color: black;
+ 
+}
+
+
+/* .screen {
+   
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: black;
+
+    margin:-10px;
+    padding: 0px;
+} */
+
+.main-container {
+    display:flex;
+    justify-content: space-between;
+    
+    
+}
+
+.button {
+    background-color:goldenrod;
+    margin-bottom: 200px;
+    min-height:40px; 
+}
+
+
+.hand {
+    min-width: 20%;
+    
+}
+
+.button-container {
+    display:flex;
+    align-items: flex-end;
+    gap: 20px;
+}
