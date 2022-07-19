@@ -7,25 +7,33 @@
     <link rel="stylesheet" href="styles.css">
     <title>RPS:Final Fist</title>
 </head>
+
 <body>
-    <!----On screen buttons---->
-    <div class="screen"></div>
-        <div class="main-container">
-            <img src="./assets/images/player/player rock.png" class="hand">
+    <!-- Header -->
+    <header>
+        <p style="color:white;">energy bars go here</p>
+    </header>
+
+    <!-- Content -->
+    <div class = "game-container">
+        <img src="./assets/images/player/player-rock.png" id='rock' class="player-hand active-hand">
             <div class="button-container">
-                <button class="button">Rock</button>
-                <button class="button">Scissors</button>
-                <button class="button">Paper</button>
+                <button class="buttons" id="rock">Rock</button>
+                <button class="buttons" id="scissors">Scissors</button>
+                <button class="buttons" id="paper">Paper</button>
             </div>
-            <img src="./assets/images/computer/computer-rock.png" class="hand">
-        </div>
-        
+        <img src="./assets/images/computer/computer-rock.png" class="computer-hand"> 
+    </div>
+    <div class="strike-button-container">
+        <button class="strike-button">Strike!</button>
+    </div>
 
+    <!-- Footer -->
+   <footer>
+        <p>footer text goes here</p>
+   </footer>
 
-   <script src="./script.js">
-   </script>
-
-
+   <script src="./script.js"></script>
 
 </body>
 </html>

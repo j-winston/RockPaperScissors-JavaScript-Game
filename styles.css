@@ -2,45 +2,78 @@
 body {
     background-image:  url("./assets/images/double-dragon-garage.png");
     background-repeat: no-repeat;
-    background-size:contain;
+    background-size: contain;
     background-color: black;
+    height: 100vh;
+    margin:0px;
+    display:flex;
+    flex-direction: column;
  
 }
 
+header {
+    min-height: 50px;
+    background-color: darkblue;
 
-/* .screen {
-   
-    height: 100vh;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-color: black;
+}
 
-    margin:-10px;
-    padding: 0px;
-} */
+footer {
+    min-height: 30px;
+    background-color: blue;
+    margin-top: auto;
+}
 
-.main-container {
+
+.player-hand {
+    max-height:60%;
+    
+
+}
+
+.computer-hand {
+    max-height:60%;
+    
+
+}
+
+
+.game-container {
     display:flex;
     justify-content: space-between;
-    
+    margin-top: 30%;
     
 }
 
-.button {
+.buttons {
     background-color:goldenrod;
-    margin-bottom: 200px;
-    min-height:40px; 
+    align-self: flex-end;
 }
 
-
-.hand {
-    min-width: 20%;
-    
+.strike-button-container {
+    display:flex;
+    justify-content: center;
 }
 
 .button-container {
     display:flex;
-    align-items: flex-end;
-    gap: 20px;
 }
+
+/* .hand-slide {
+    animation-duration: 3s;
+    animation-name: slidein;
+}
+
+@keyframes slidein {
+    from {
+        margin-left: 100%;
+    }
+
+    75% {
+        margin-left: 25%;
+    }
+
+    to {
+        margin-left: 0%;
+
+    }
+} */
