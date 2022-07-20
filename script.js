@@ -24,6 +24,23 @@ function generateLifeBars(){
 
 }
 
+function reduceLifeBar(who){
+
+  if(who == 'player') {
+    const lifeBar = document.querySelector('.player-life-bar');
+    const remainingLife = lifeBar.querySelector('div:not(.inactive)');
+    remainingLife.classList.add('inactive')
+    
+  }else {
+    const lifeBar = document.querySelector('.cpu-life-bar');
+    const remainingLife = lifeBar.querySelector('div:not(.inactive)');
+    remainingLife.classList.add('inactive');
+  }
+
+}
+
+
+
 function generateRandomHand() {
   let plays = ["rock", "paper", "scissors"];
   computerHand = plays[Math.round(Math.random() * (2 - 0) + 0)];
@@ -145,7 +162,7 @@ function activateButton(e) {
 }
 
 generateLifeBars();
-
+reduceLifeBar('player');
 // Player controls 
 
 const buttons = document.querySelectorAll(".buttons");
