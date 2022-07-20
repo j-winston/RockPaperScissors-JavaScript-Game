@@ -4,8 +4,6 @@ let roundNumber = 1;
 let userWins = 0;
 let computerWins = 0;
 
-
-
 function generateRandomHand() {
   let plays = ["rock", "paper", "scissors"];
   computerHand = plays[Math.round(Math.random() * (2 - 0) + 0)];
@@ -15,14 +13,19 @@ function generateRandomHand() {
 }
 
 function playRound() {
-  const computersHand = generateRandomHand();
-  changeComputerHand(computersHand)
+  const cpuHand = generateRandomHand();
+  changeComputerHand(cpuHand);
 
-  const playersHand = document.querySelector('.active-hand').getAttribute('id')
-  
-  let winner = "";
+  const usersHand = document.querySelector(".active-item").getAttribute("id");
+  changePlayerHand(usersHand);
 
+  let winner = decideWinner(usersHand, cpuHand);
 
+  displayWinner(winner);
+
+}
+
+function decideWinner(playersHand, computersHand) {
   if (computersHand === "rock") {
     if (playersHand === "paper") {
       winner = "player";
@@ -48,8 +51,8 @@ function playRound() {
       return "tie";
     }
   }
-  console.log(winner)
 }
+  
 
 // function toTitleCase(userString) {
 //     userString = userString.toLowerCase()
@@ -60,9 +63,7 @@ function playRound() {
 //     return titleCaseString;
 // }
 
-
-
-//TODO--1. play a single round with 4 functioning buttons: rock, scissors, paper, and strike. Output results to console. Use background image 
+//TODO--1. play a single round with 4 functioning buttons: rock, scissors, paper, and strike. Output results to console. Use background image
 
 //Main game loop
 
@@ -81,44 +82,54 @@ function playRound() {
 //     break;
 //   }
 
-function changePlayerHand() {
-  const playerHandGraphic = document.querySelector('.player-hand');
-  const newHandId = this.getAttribute('id');
+function changePlayerHand(hand) {
+  const playersChoice = hand;
+  const playerHandGraphic = document.querySelector(".player-hand");
 
-  playerHandGraphic.src = `./assets/images/player/player-${newHandId}.png`;
-  playerHandGraphic.classList.add('active-hand')
+  playerHandGraphic.src = `./assets/images/player/player-${playersChoice}.png`;
   playerHandGraphic.id = newHandId;
 }
 
 function changeComputerHand(hand) {
-  const computerHandGraphic = document.querySelector('.computer-hand');
-  computerHandGraphic.src = `./assets/images/computer/computer-${hand}.png`;
- 
+  const computersChoice = hand;
+  const computerHandGraphic = document.querySelector(".computer-hand");
+  computerHandGraphic.src = `./assets/images/computer/computer-${computersChoice}.png`;
+}
+
+function activateButton(e) {
+  if( document.querySelector('.active-item') ){
+    const prevItem = document.querySelector('.active-item');
+    prevItem.classList.remove('active-item');
+
+  }
+  const activeId = e.target.id; 
+  const activeButton = document.getElementById(activeId);
+  activeButton.classList.add('active-item');
+
 }
 
 
-// Add event listeners for action buttons
+// Player controls 
+
 const buttons = document.querySelectorAll(".buttons");
-buttons.forEach(button => button.addEventListener('click', changePlayerHand))
+buttons.forEach((button) => button.addEventListener("click", activateButton));
 
-const strikeButton = document.querySelector('.strike-button');
-strikeButton.addEventListener('click', playRound)
-  
+const strikeButton = document.querySelector(".strike-button");
+strikeButton.addEventListener("click", playRound);
 
+// if (theWinner === "player") {
+//   userWins++;
+//   console.log(`You win.`);
 
-  // if (theWinner === "player") {
-  //   userWins++;
-  //   console.log(`You win.`);
-    
-  // } else if (theWinner === "computer") {
-  //   computerWins++;
-  //   console.log(`-----COMPUTER WINS-----`);
-  // }
+// } else if (theWinner === "computer") {
+//   computerWins++;
+//   console.log(`-----COMPUTER WINS-----`);
+// }
 
-  // // If tie round, do the round over, don't increment it
-  // if (theWinner === "tie") {
-  //   console.log(`Tie round. Both players chose ${userHand}. Run it back!`);
-  // } else {
-  //   roundNumber++;
-  // }
-//end while 
+// // If tie round, do the round over, don't increment it
+// if (theWinner === "tie") {
+//   console.log(`Tie round. Both players chose ${userHand}. Run it back!`);
+// } else {
+//   roundNumber++;
+// }
+//end while

@@ -26,7 +26,6 @@ footer {
 
 .player-hand {
     max-height:60%;
-    
 
 }
 
@@ -77,3 +76,7 @@ footer {
 
     }
 } */
+
+.active-item {
+    background-color: violet;
+}

@@ -37,10 +37,15 @@ ENDWHILE
 
 
 FUNCTIONALITIES::
-TODO--1. play a single round with 4 functioning buttons: rock, scissors, paper, and strike. Output results to console. Use background image . [don't forget to commit early and often]
+TODO--1. play a single round with 4 functioning buttons: rock, scissors, paper, and strike. Output results to console. Use background image . [don't forget to commit early and often] DONE 
         
 
 TODO--2. add hand animation to screen for player and computer. outputs winner to console.
+
+
+
+
+
 TODO--3. display life point bar that removes life bar for each round lost. 
 TODO--4. display post round messages on screen 
 TODO--5. display introduction story line to screen 
