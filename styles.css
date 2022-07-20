@@ -80,3 +80,31 @@ footer {
 .active-item {
     background-color: violet;
 }
+
+.countdown-container {
+    display: flex; 
+    justify-content: center;
+    gap: 10px;
+}
+
+
+.timer,
+.countdown-text {
+    color: white;
+    font-size: 5vh;
+}
+
+.message-container {
+    display:flex; 
+    align-items: center;
+    flex-direction: column;
+    margin: 0px;
+
+}
+
+.game-text,
+.game-subtext {
+    color:yellow;
+    margin: 0px;
+
+}

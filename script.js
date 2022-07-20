@@ -7,7 +7,6 @@ let computerWins = 0;
 function generateRandomHand() {
   let plays = ["rock", "paper", "scissors"];
   computerHand = plays[Math.round(Math.random() * (2 - 0) + 0)];
-  // computerHand = toTitleCase(computerHand);
 
   return computerHand;
 }
@@ -16,12 +15,12 @@ function playRound() {
   const cpuHand = generateRandomHand();
   changeComputerHand(cpuHand);
 
-  const usersHand = document.querySelector(".active-item").getAttribute("id");
-  changePlayerHand(usersHand);
+  const userHand = document.querySelector(".active-item").getAttribute("id");
+  changePlayerHand(userHand);
 
-  let winner = decideWinner(usersHand, cpuHand);
+  let winner = decideWinner(userHand, cpuHand);
 
-  displayWinner(winner);
+  displayMessage(winner, userHand, cpuHand);
 
 }
 
@@ -48,22 +47,39 @@ function decideWinner(playersHand, computersHand) {
     } else if (playersHand === "paper") {
       winner = "computer";
     } else {
-      return "tie";
+      winner = "tie";
     }
   }
+  return winner;
+
 }
   
+function displayMessage(winner, playersHand, computersHand) {
+  let result = '';
+  let stat = '';
 
-// function toTitleCase(userString) {
-//     userString = userString.toLowerCase()
-//     firstLetter = userString.charAt(0)
-//     firstLetterCap = firstLetter.toUpperCase();
-//     titleCaseString = firstLetterCap + userString.slice(1);
+  if (winner == 'player') {
+    result = 'You win!';
+    stat = `${playersHand.toUpperCase()} beats ${computersHand}!`
+  }else if (winner == 'tie'){
+    result = 'Tie round.';
+    stat = 'Run it back!';
+  } else{
+    result = 'You lose!';
+    stat = `${computersHand.toUpperCase()} beats ${playersHand}!`
+  }
+  
+  const winnerMessage = document.querySelector('.game-text');
+  const statDisplay = document.querySelector('.game-subtext');
+  
+  winnerMessage.textContent = result;
+  statDisplay.textContent = stat;
 
-//     return titleCaseString;
-// }
 
-//TODO--1. play a single round with 4 functioning buttons: rock, scissors, paper, and strike. Output results to console. Use background image
+
+}
+
+
 
 //Main game loop
 
@@ -87,7 +103,7 @@ function changePlayerHand(hand) {
   const playerHandGraphic = document.querySelector(".player-hand");
 
   playerHandGraphic.src = `./assets/images/player/player-${playersChoice}.png`;
-  playerHandGraphic.id = newHandId;
+  
 }
 
 function changeComputerHand(hand) {
