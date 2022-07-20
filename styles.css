@@ -19,7 +19,7 @@ header {
 
 footer {
     min-height: 30px;
-    background-color: blue;
+    background-color: black
     margin-top: auto;
 }
 
@@ -107,4 +107,43 @@ footer {
     color:yellow;
     margin: 0px;
 
+}
+
+.life-container {
+    display:flex;
+    justify-content: space-around;
+
+}
+.credit-text {
+    color:azure;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.player-lives, 
+.computer-lives {
+    color: azure;
+}
+
+.cpu-life-bar,
+.player-life-bar {
+    display:flex;
+
+}
+.cpu-life-unit { 
+    height: 3vh;
+    min-width:4vw; 
+    border: solid white 4px;
+    background-color: red;
+}
+
+.player-life-unit { 
+    height: 3vh;
+    min-width:4vw; 
+    border: solid white 4px;
+    background-color: blue;
+}
+
+.inactive {
+    background-color: black;
 }

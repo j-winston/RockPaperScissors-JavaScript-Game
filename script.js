@@ -4,6 +4,26 @@ let roundNumber = 1;
 let userWins = 0;
 let computerWins = 0;
 
+let userLifeUnits = 5;
+let cpuLifeUnits = 5;
+
+function generateLifeBars(){
+  for(let x=0; x < 5; x++) {
+    // Draw player life units 
+    const lifeUnit = document.createElement('div');
+    lifeUnit.classList.add('player-life-unit');
+    const lifeBar = document.querySelector('.player-life-bar');
+    lifeBar.appendChild(lifeUnit);
+
+    //Draw cpu life units 
+    const cpuLifeUnit = document.createElement('div');
+    cpuLifeUnit.classList.add('cpu-life-unit');
+    const cpuLifeBar = document.querySelector('.cpu-life-bar');
+    cpuLifeBar.appendChild(cpuLifeUnit);
+  }
+
+}
+
 function generateRandomHand() {
   let plays = ["rock", "paper", "scissors"];
   computerHand = plays[Math.round(Math.random() * (2 - 0) + 0)];
@@ -124,6 +144,7 @@ function activateButton(e) {
 
 }
 
+generateLifeBars();
 
 // Player controls 
 
