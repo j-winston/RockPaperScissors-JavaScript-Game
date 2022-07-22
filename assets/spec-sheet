@@ -47,16 +47,7 @@ TODO--2. add hand animation to screen for player and computer. outputs winner to
 
 
 TODO--3. display life point bar that removes life bar for each round lost. 
-SET playerLife 5
-SET cpuLife to 5
-
-IF player loses
-        THEN deduct 1from playerLife
-ELSE IF cpu loses
-        THEN deduct 1 from cpuLife
-ENDIF 
-
-
+todo--3a. Game ends once player loses last energy bar unit 
 
 
 
