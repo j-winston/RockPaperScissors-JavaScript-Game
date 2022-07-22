@@ -24,7 +24,7 @@ function reduceLife(target){
   if(target == 'player') {
     const lifeBar = document.querySelector('.player-life-bar');
     const remainingLife = lifeBar.querySelector('div:not(.inactive)');
-    remainingLife.classList.add('inactive');
+    remainingLife.classList.addgit ('inactive');
 
     // Set game to end if no lives
     const totalRemainingLives = lifeBar.querySelectorAll('div:not(.inactive)');
@@ -50,11 +50,6 @@ function generateRandomHand() {
   return computerHand;
 }
 
-function determineWinner(computerSelection, playerSelection) {
-    // Make all inputs title case for consistency
-    computerSelection = computerSelection.toLowerCase();
-    playerSelection = playerSelection.toLowerCase();
-  let winner = "";
 
 function decideWinner(playersHand, computersHand) {
   if (computersHand === "rock") {
