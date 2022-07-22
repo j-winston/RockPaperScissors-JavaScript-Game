@@ -1,0 +1,147 @@
+
+body {
+    background-image:  url("./assets/images/double-dragon-garage.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: black;
+    height: 100vh;
+    margin:0px;
+    display:flex;
+    flex-direction: column;
+ 
+}
+
+
+.dither-background {
+    background-image: url("./assets/images/double-dragon-garage.png")
+
+
+}
+
+
+header {
+    min-height: 50px;
+    background-color: darkblue;
+
+}
+
+footer {
+    min-height: 30px;
+    background-color: black
+    margin-top: auto;
+}
+
+
+.player-hand {
+    max-height:60%;
+
+}
+
+.computer-hand {
+    max-height:60%;
+    
+
+}
+
+
+.game-container {
+    display:flex;
+    justify-content: space-between;
+    margin-top: 30%;
+    
+}
+
+.buttons {
+    background-color:goldenrod;
+    align-self: flex-end;
+}
+
+.strike-button-container {
+    display:flex;
+    justify-content: center;
+}
+
+.button-container {
+    display:flex;
+}
+
+
+.active-item {
+    background-color: violet;
+}
+
+.countdown-container {
+    display: flex; 
+    justify-content: center;
+    gap: 10px;
+}
+
+
+.timer,
+.countdown-text {
+    color: white;
+    font-size: 5vh;
+}
+
+.message-container {
+    display:flex; 
+    align-items: center;
+    flex-direction: column;
+    margin: 0px;
+
+}
+
+.game-text,
+.game-subtext {
+    color:yellow;
+    margin: 0px;
+
+}
+
+.life-container {
+    display:flex;
+    justify-content: space-around;
+
+}
+.credit-text {
+    color:azure;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.player-lives, 
+.computer-lives {
+    color: azure;
+}
+
+.cpu-life-bar,
+.player-life-bar {
+    display:flex;
+
+}
+.cpu-life-unit { 
+    height: 3vh;
+    min-width:4vw; 
+    border: solid white 4px;
+    background-color: red;
+}
+
+.player-life-unit { 
+    height: 3vh;
+    min-width:4vw; 
+    border: solid white 4px;
+    background-color: blue;
+}
+
+.inactive {
+    background-color: black;
+}
+
+.dither-background {
+    transition: 3s;
+    background-blend-mode: luminosity;
+}
+
+.graywash {
+    mix-blend-mode: luminosity;
+}
