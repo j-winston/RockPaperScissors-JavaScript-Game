@@ -203,15 +203,18 @@ const introText = [
   "Are you prepared to fight....?",
 ];
 
-typeWriter();
+typeWriter(0);
 
-function typeWriter(){
-  if(i < introText[0].length) {
-    document.querySelector('.game-text').textContent += introText[0].charAt(i);
-    setTimeout(typeWriter, 150);
+function typeWriter(index){
+  if(i < introText[index].length) {
+    document.querySelector('.game-text').textContent += introText[index].charAt(i);
+    setTimeout(typeWriter, 150,index);
     i++;
+  }else{
+    index++;
+    i=0;
+    setTimeout(typeWriter, 150, index);
   }
-  
 }
 
 
