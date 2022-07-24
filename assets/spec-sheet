@@ -1,3 +1,5 @@
+
+
 PROBLEM: Rock scissors paper is currently in text. IN order to make the game play more engaging, 
 we need a user interface.  For nostaligic appeal. we will borrow heavily from the 80's arcade hit, Double Dragon. 
 
@@ -51,14 +53,18 @@ todo--3a. Game ends once player loses last energy bar unit
 
 
 
-
-TODO--4. display post round messages on screen 
 TODO--5. display introduction story line to screen 
+
+
+
+
 TODO--6. display victory messages
 TODO--7. Add different background for victory and defeat
 TODO--8. Add music for intro, gameplay, win and defeat. 
 TODO--9. Last minute animations : slide in fists, drop down energy bars, moving arms up and down after pressing 'strike'
 TOD0--10. Add sound effects for ROCK {smash} PAPER{crumple} scissors {sword}
+
+TOO 11-- Add James Winston with some cool animated logo 
 
 
 ------

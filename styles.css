@@ -1,29 +1,36 @@
 
 body {
-    background-image:  url("./assets/images/double-dragon-garage.png");
-    background-repeat: no-repeat;
-    background-size: contain;
+    /* background-image:  url("./assets/images/double-dragon-intro.png"); */
+    
     background-color: black;
     height: 100vh;
     margin:0px;
     display:flex;
     flex-direction: column;
- 
+    
+}
+
+.background {
+    background-image: url("./assets/images/double-dragon-intro.png"); 
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-color: black;
+    visibility: hidden;
+}
+
+
+body::before {
+    color:black;
+    content: "";
+    position:absolute;
+    z-index: 1;
 }
 
 
 .dither-background {
     background-image: url("./assets/images/double-dragon-garage.png")
-
-
 }
 
-
-header {
-    min-height: 50px;
-    background-color: darkblue;
-
-}
 
 footer {
     min-height: 30px;
@@ -34,12 +41,13 @@ footer {
 
 .player-hand {
     max-height:60%;
+    visibility: hidden;
 
 }
 
 .computer-hand {
     max-height:60%;
-    
+    visibility: hidden;
 
 }
 
@@ -48,6 +56,7 @@ footer {
     display:flex;
     justify-content: space-between;
     margin-top: 30%;
+    visibility: hidden;
     
 }
 
@@ -145,3 +154,32 @@ footer {
 .graywash {
     mix-blend-mode: luminosity;
 }
+
+.fade-in {
+    visibility: visible;
+    animation-name: fade-in;
+    animation-duration: 4s;
+    
+
+}
+
+@keyframes fade-in {
+    from {opacity: .0;}
+    to {opacity: 1;
+    }
+    
+}
+
+@keyframes fade-out {
+    from {opacity: 1;}
+    to {opacity: .0;
+    }
+    
+}
+
+.fade-out {
+    animation-name: fade-out;
+    animation-duration: 2s;
+    
+}
+
