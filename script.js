@@ -1,4 +1,14 @@
+// Globals 
 let stillPlaying = true;
+// Used to track index of intro screen text
+let i = 0;
+const introText = [
+  "NYC: Sept 24, 2041..",
+  "Willy and the dark warriors have once again captured Marian..",
+  "This time, however, he's willing to fight you in a game of rock, paper, scissors...",
+  "Prepare to fight..",
+];
+
 
 function generateLifeBars() {
   for (let x = 0; x < 5; x++) {
@@ -185,25 +195,20 @@ function playRound() {
   if (stillPlaying == false) endGame(winner);
 }
 
+
 function loadGameOpening() {
   // Fade-in introduction background
   document.querySelector(".background").classList.add("fade-in");
   displayOpeningText();
+
 }
 
-let i = 0;
-let j = 0;
-function displayOpeningText() {}
 
-const introText = [
-  "NYC: Sept 24, 2041..",
-  "Willy and the dark warriors have once again captured Marian..",
-  "This time, however, he's willing to fight you in a game of rock, paper, scissors...",
-  "The stakes are high. Every second that passes puts her life at risk...",
-  "Are you prepared to fight....?",
-];
 
+function displayOpeningText() {
 typeWriter(0);
+}
+
 
 function typeWriter(index){
   if(i < introText[index].length) {
@@ -213,7 +218,9 @@ function typeWriter(index){
   }else{
     index++;
     i=0;
-    setTimeout(typeWriter, 150, index);
+    // Reset text on screen
+    document.querySelector('.game-text').textContent = "";
+    setTimeout(typeWriter, 10, index);
   }
 }
 
@@ -247,3 +254,7 @@ function initializeGame() {
 // Main events
 
 window.onload = loadGameOpening;
+// put wait here 
+setTimeout(initializeGame, 28000);
+
+

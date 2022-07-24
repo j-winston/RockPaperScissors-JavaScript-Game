@@ -19,13 +19,6 @@ body {
 }
 
 
-body::before {
-    color:black;
-    content: "";
-    position:absolute;
-    z-index: 1;
-}
-
 
 .dither-background {
     background-image: url("./assets/images/double-dragon-garage.png")
@@ -102,8 +95,9 @@ footer {
 
 .game-text,
 .game-subtext {
-    color:yellow;
-    margin: 0px;
+    color:white;
+    margin: 40px;
+    max-width: 50vw;
 
 }
 
@@ -156,9 +150,10 @@ footer {
 }
 
 .fade-in {
-    visibility: visible;
+    visibility:visible!important;
     animation-name: fade-in;
-    animation-duration: 4s;
+    animation-duration: 1s;
+
     
 
 }
@@ -178,8 +173,9 @@ footer {
 }
 
 .fade-out {
+    visibility: hidden;
     animation-name: fade-out;
-    animation-duration: 2s;
+    animation-duration: 1s;
     
 }
 
