@@ -229,6 +229,9 @@ function initializeGame() {
   // Give each player 5 bars of life
   generateLifeBars();
 
+  // Reveal new background 
+  document.querySelector(".background").classList.add('garage-background');
+
   // Reveal life bars
   document.querySelector(".life-container").classList.add("fade-in");
 
@@ -236,7 +239,7 @@ function initializeGame() {
   document.querySelector(".game-container").classList.add("fade-in");
   document.querySelector(".strike-button-container").classList.add("fade-in");
 
-  // Fade in hands
+  // Reveal hands
   const playerHand = document.querySelector(".player-hand");
   const computerHand = document.querySelector(".computer-hand");
   computerHand.classList.add("fade-in");
@@ -246,15 +249,15 @@ function initializeGame() {
   const buttons = document.querySelectorAll(".buttons");
   buttons.forEach((button) => button.addEventListener("click", activateButton));
 
-  // Every time 'strike' button is hit, play a round
+  // Set up 'strike' button to play a round each click
   const strikeButton = document.querySelector(".strike-button");
   strikeButton.addEventListener("click", playRound);
+
 }
 
 // Main events
 
 window.onload = loadGameOpening;
-// put wait here 
+// Put pause here before starting game 
 setTimeout(initializeGame, 28000);
-
 

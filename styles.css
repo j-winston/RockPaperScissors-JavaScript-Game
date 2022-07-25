@@ -15,7 +15,6 @@ body {
     background-size:contain;
     background-repeat: no-repeat;
     background-color: black;
-    visibility: hidden;
 }
 
 
@@ -53,6 +52,8 @@ footer {
     
 }
 
+
+ /* Buttons */
 .buttons {
     background-color:goldenrod;
     align-self: flex-end;
@@ -61,16 +62,17 @@ footer {
 .strike-button-container {
     display:flex;
     justify-content: center;
+    visibility:hidden;
 }
 
 .button-container {
     display:flex;
 }
 
-
 .active-item {
     background-color: violet;
 }
+
 
 .countdown-container {
     display: flex; 
@@ -177,5 +179,13 @@ footer {
     animation-name: fade-out;
     animation-duration: 1s;
     
+}
+
+.garage-background {
+    background-image:  url("./assets/images/double-dragon-garage.png");
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-color: black;
+    transition: 2s;
 }
 
