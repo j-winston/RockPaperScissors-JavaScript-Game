@@ -31,10 +31,6 @@ function reduceLife(target) {
     const lifeBar = document.querySelector(".player-life-bar");
     const remainingLife = lifeBar.querySelector("div:not(.inactive)");
     remainingLife.classList.add("inactive");
-<<<<<<< HEAD
-
-=======
->>>>>>> intro-screen
 
     // Set game to end if no lives
     const totalRemainingLives = lifeBar.querySelectorAll("div:not(.inactive)");
