@@ -151,6 +151,12 @@ footer {
     mix-blend-mode: luminosity;
 }
 
+.normal-color {
+    transition: 3s;
+    mix-blend-mode: normal;
+    background-blend-mode:normal;
+}
+
 .fade-in {
     visibility:visible!important;
     animation-name: fade-in;

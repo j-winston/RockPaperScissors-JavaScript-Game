@@ -3,31 +3,46 @@ let stillPlaying = true;
 // Used to track index of intro screen text
 let i = 0;
 const introText = [
-  "NYC: Sept 24, 2041..",
-  "Willy and the dark warriors have once again captured Marian..",
-  "This time, however, he's willing to fight you in a game of rock, paper, scissors...",
-  "Prepare to fight..",
+  // "NYC: Sept 24, 2041..",
+  // "Willy and the dark warriors have once again captured Marian..",
+  // "This time, however, he's willing to fight you in a game of rock, paper, scissors...",
+  // "Prepare to fight..",
 ];
 
 
-function generateLifeBars() {
-  for (let x = 0; x < 5; x++) {
-    // Draw player life units
-    const lifeUnit = document.createElement("div");
-    lifeUnit.classList.add("player-life-unit");
-    const lifeBar = document.querySelector(".player-life-bar");
-    lifeBar.appendChild(lifeUnit);
 
-    //Draw cpu life units
-    const cpuLifeUnit = document.createElement("div");
-    cpuLifeUnit.classList.add("cpu-life-unit");
-    const cpuLifeBar = document.querySelector(".cpu-life-bar");
-    cpuLifeBar.appendChild(cpuLifeUnit);
+function generateLifeBars() {
+  const lifeBar = document.querySelector(".player-life-bar");
+  const cpuLifeBar = document.querySelector(".cpu-life-bar");
+
+  // Presence of .life-unit class tells us it's a continued game 
+  if(document.querySelector('.cpu-life-unit') || document.querySelector('.player-life-unit')){
+    // So we can just reset the little life boxes 
+    const playerLifeUnits = document.querySelectorAll('.player-life-unit');
+    const cpuLifeUnits = document.querySelectorAll('.cpu-life-unit');
+    playerLifeUnits.forEach((bar)=> bar.classList.remove('inactive'));
+    cpuLifeUnits.forEach((bar)=> bar.classList.remove('inactive'));
+
+  } else {
+    // But if new game, create a fresh energy bar for both players!
+    for (let x = 0; x < 5; x++) {
+      const lifeUnit = document.createElement("div");
+      lifeUnit.classList.add("player-life-unit");
+      lifeBar.appendChild(lifeUnit);
+
+      const cpuLifeUnit = document.createElement("div");
+      cpuLifeUnit.classList.add("cpu-life-unit");
+      cpuLifeBar.appendChild(cpuLifeUnit);
+    }
+
   }
 }
 
+
+
 function reduceLife(target) {
   if (target == "player") {
+    // Reduce player life by 1
     const lifeBar = document.querySelector(".player-life-bar");
     const remainingLife = lifeBar.querySelector("div:not(.inactive)");
     remainingLife.classList.add("inactive");
@@ -35,10 +50,11 @@ function reduceLife(target) {
     // Set game to end if no lives
     const totalRemainingLives = lifeBar.querySelectorAll("div:not(.inactive)");
     if (totalRemainingLives.length < 1) stillPlaying = false;
-  } else {
+  } else { // Reduce cpu life by 1
     const cpuLifeBar = document.querySelector(".cpu-life-bar");
     const cpuRemainingLife = cpuLifeBar.querySelector("div:not(.inactive)");
     cpuRemainingLife.classList.add("inactive");
+ 
     // End game if no more energy units
     const totalCpuRemainingLives =
       cpuLifeBar.querySelectorAll("div:not(.inactive)");
@@ -142,7 +158,7 @@ function deactivateInterface() {
   cpuLifeBar.style.opacity = 0.2;
 
   // Gray out background
-  const background = document.querySelector("body");
+  const background = document.querySelector(".background");
   background.classList.add("dither-background");
 
   // Gray out user hands
@@ -154,22 +170,45 @@ function deactivateInterface() {
   buttons.forEach((button) => button.classList.add("graywash"));
 }
 
-function endGame(winningPlayer) {
+
+function displayEnding(winningPlayer) {
   // Display end of game message
   const message = document.querySelector(".game-text");
   const messageSubtext = document.querySelector(".game-subtext");
 
+  // Display victory or defeat message
   if (winningPlayer == "computer") {
     message.textContent = "You're hurt, but don't give up!";
     messageSubtext.textContent = "Think about Mariane!";
   } else {
-    message.textContent = "With one last crushing blow, you dispatch Willy.";
-    messageSubtext.textContent =
-      "Hours later, you find Marianne, shaken but unhurt";
+    message.textContent = " Well done! With one last crushing blow, you defeat Willy.", 
+    "Hours later, you find Marianne, shaken but unhurt";
   }
-
+  
   // Gray out background and disable buttons
   deactivateInterface();
+
+  // Give option to continue
+  playAgain();
+}
+
+function playAgain() {
+  // display continue message 
+  const mesg = "Do you wish to play again? Hit Y or N";
+  document.querySelector('.game-text').textContent = mesg;
+
+  // Get user input 
+  document.addEventListener('keydown', (event)=> {
+    // Reset game if need be
+    const key = event.key;
+    if (key.toLowerCase() == 'y'){
+      initializeGame();
+    }else { 
+      //terminate game here
+
+    }
+  });
+
 }
 
 function playRound() {
@@ -192,7 +231,7 @@ function playRound() {
     reduceLife("player");
   }
 
-  if (stillPlaying == false) endGame(winner);
+  if (stillPlaying == false) displayEnding(winner);
 }
 
 
@@ -226,6 +265,32 @@ function typeWriter(index){
 
 
 function initializeGame() {
+  // Enable all buttons 
+  const btns = document.querySelectorAll(".buttons");
+  const strikeButton = document.querySelector(".strike-button");
+  btns.forEach((button) => (button.disabled = false));
+  strikeButton.disabled = false;
+
+  // Awaken grayed out interface components
+  // Energy bar
+  const lifeBar = document.querySelector(".player-life-bar");
+  const cpuLifeBar = document.querySelector(".cpu-life-bar");
+  lifeBar.style.opacity = 1;
+  cpuLifeBar.style.opacity = 1;
+
+  // Background
+  document.querySelector(".background").classList.remove('dither-background');
+
+  // Hands
+  document.querySelector(".player-hand").classList.add("normal-color");
+  document.querySelector(".computer-hand").classList.add("normal-color");
+
+  // Rock scissors paper buttons
+  const buttons = document.querySelectorAll(".buttons");
+  buttons.forEach((button)=> button.classList.remove('.gray-wash'));
+  
+  
+  // Initialize new game stuff 
   // Give each player 5 bars of life
   generateLifeBars();
 
@@ -246,11 +311,9 @@ function initializeGame() {
   playerHand.classList.add("fade-in");
 
   // Activate rock, paper, scissors buttons
-  const buttons = document.querySelectorAll(".buttons");
   buttons.forEach((button) => button.addEventListener("click", activateButton));
 
   // Set up 'strike' button to play a round each click
-  const strikeButton = document.querySelector(".strike-button");
   strikeButton.addEventListener("click", playRound);
 
 }
@@ -258,6 +321,7 @@ function initializeGame() {
 // Main events
 
 window.onload = loadGameOpening;
+
 // Put pause here before starting game 
-setTimeout(initializeGame, 28000);
+setTimeout(initializeGame);
 
