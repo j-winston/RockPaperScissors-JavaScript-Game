@@ -170,8 +170,10 @@ function displayEnding(winningPlayer) {
 
 function playAgain() {
   // display continue message 
-  const mesg = "Do you wish to play again? Hit Y or N";
+  const mesg = "Do you wish to play again?";
+  const subMesg = "Hit Y or N"
   document.querySelector('.game-text').textContent = mesg;
+  document.querySelector('.game-subtext').textContent = subMesg;
 
   // Get user input 
   document.addEventListener('keydown', (event)=> {
@@ -304,8 +306,8 @@ function initializeGame() {
   document.querySelector(".background").classList.remove('dither-background');
 
   // Hands
-  document.querySelector(".player-hand").classList.add("normal-color");
-  document.querySelector(".computer-hand").classList.add("normal-color");
+  document.querySelector(".player-hand").classList.remove("graywash");
+  document.querySelector(".computer-hand").classList.remove("graywash");
 
   // Rock scissors paper buttons
   const buttons = document.querySelectorAll(".buttons");

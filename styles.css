@@ -87,6 +87,10 @@ footer {
     font-size: 5vh;
 }
 
+
+
+/* Game messages  */
+
 .message-container {
     display:flex; 
     align-items: center;
@@ -97,10 +101,21 @@ footer {
 
 .game-text,
 .game-subtext {
-    color:white;
+    color:rgb(255, 226, 61);
     margin: 40px;
     max-width: 50vw;
+    stroke: 5px black;
 
+}
+
+.losing-text {
+    color:
+}
+
+.credit-text {
+    color:azure;
+    text-transform: uppercase;
+    font-weight: 900;
 }
 
 .life-container {
@@ -108,11 +123,7 @@ footer {
     justify-content: space-around;
 
 }
-.credit-text {
-    color:azure;
-    text-transform: uppercase;
-    font-weight: 900;
-}
+
 
 .player-lives, 
 .computer-lives {
