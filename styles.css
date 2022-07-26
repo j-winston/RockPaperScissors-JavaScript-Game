@@ -158,7 +158,7 @@ footer {
 }
 
 .fade-in {
-    visibility:visible!important;
+    visibility:visible;
     animation-name: fade-in;
     animation-duration: 1s;
 

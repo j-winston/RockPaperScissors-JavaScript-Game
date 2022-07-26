@@ -9,7 +9,9 @@ const introText = [
   // "Prepare to fight..",
 ];
 
-
+//TODO-1. Fix game buttons and reactivate them 
+//TODO-2. Clear game message screen
+//TODO-3. Fix game hands 
 
 function generateLifeBars() {
   const lifeBar = document.querySelector(".player-life-bar");
@@ -143,32 +145,7 @@ function activateButton(e) {
   activeButton.classList.add("active-item");
 }
 
-function deactivateInterface() {
-  // Deactivate all buttons
-  const btns = document.querySelectorAll(".buttons");
-  const strikeButton = document.querySelector(".strike-button");
-  btns.forEach((button) => (button.disabled = true));
-  strikeButton.disabled = true;
 
-  // Gray out energy bar
-  const lifeBar = document.querySelector(".player-life-bar");
-  const cpuLifeBar = document.querySelector(".cpu-life-bar");
-
-  lifeBar.style.opacity = 0.2;
-  cpuLifeBar.style.opacity = 0.2;
-
-  // Gray out background
-  const background = document.querySelector(".background");
-  background.classList.add("dither-background");
-
-  // Gray out user hands
-  document.querySelector(".player-hand").classList.add("graywash");
-  document.querySelector(".computer-hand").classList.add("graywash");
-
-  // Gray out buttons
-  const buttons = document.querySelectorAll(".buttons");
-  buttons.forEach((button) => button.classList.add("graywash"));
-}
 
 
 function displayEnding(winningPlayer) {
@@ -199,6 +176,7 @@ function playAgain() {
 
   // Get user input 
   document.addEventListener('keydown', (event)=> {
+
     // Reset game if need be
     const key = event.key;
     if (key.toLowerCase() == 'y'){
@@ -263,6 +241,33 @@ function typeWriter(index){
   }
 }
 
+function deactivateInterface() {
+  // Deactivate all buttons
+  const btns = document.querySelectorAll(".buttons");
+  const strikeButton = document.querySelector(".strike-button");
+  btns.forEach((button) => (button.disabled = true));
+  strikeButton.disabled = true;
+
+  // Gray out energy bar
+  const lifeBar = document.querySelector(".player-life-bar");
+  const cpuLifeBar = document.querySelector(".cpu-life-bar");
+
+  lifeBar.classList.add('graywash');
+  cpuLifeBar.classList.add('graywash');
+
+  // Gray out background
+  const background = document.querySelector(".background");
+  background.classList.add("dither-background");
+
+  // Gray out user hands
+  document.querySelector(".player-hand").classList.add("graywash");
+  document.querySelector(".computer-hand").classList.add("graywash");
+
+  // Gray out buttons
+  const buttons = document.querySelectorAll(".buttons");
+  buttons.forEach((button) => button.classList.add("graywash"));
+}
+
 
 function initializeGame() {
   // Enable all buttons 
@@ -272,11 +277,15 @@ function initializeGame() {
   strikeButton.disabled = false;
 
   // Awaken grayed out interface components
+
   // Energy bar
   const lifeBar = document.querySelector(".player-life-bar");
   const cpuLifeBar = document.querySelector(".cpu-life-bar");
-  lifeBar.style.opacity = 1;
-  cpuLifeBar.style.opacity = 1;
+  lifeBar.classList.remove('graywash');
+  cpuLifeBar.classList.remove('graywash');
+  
+  //Buttons
+  btns.forEach((button) => button.classList.remove("graywash"));
 
   // Background
   document.querySelector(".background").classList.remove('dither-background');
@@ -294,7 +303,7 @@ function initializeGame() {
   // Give each player 5 bars of life
   generateLifeBars();
 
-  // Reveal new background 
+  // Reveal main background
   document.querySelector(".background").classList.add('garage-background');
 
   // Reveal life bars
@@ -310,7 +319,7 @@ function initializeGame() {
   computerHand.classList.add("fade-in");
   playerHand.classList.add("fade-in");
 
-  // Activate rock, paper, scissors buttons
+  // Set up rock paper scissors buttons
   buttons.forEach((button) => button.addEventListener("click", activateButton));
 
   // Set up 'strike' button to play a round each click
