@@ -155,8 +155,7 @@ function displayEnding(winningPlayer) {
 
   // Display victory or defeat message
   if (winningPlayer == "computer") {
-    message.textContent = "You're hurt, but don't give up!";
-    messageSubtext.textContent = "Think about Mariane!";
+    message.textContent = "You're hurt, but don't give up! Think about Marianne";
   } else {
     message.textContent = " Well done! With one last crushing blow, you defeat Willy.", 
     "Hours later, you find Marianne, shaken but unhurt";
@@ -266,10 +265,24 @@ function deactivateInterface() {
   // Gray out buttons
   const buttons = document.querySelectorAll(".buttons");
   buttons.forEach((button) => button.classList.add("graywash"));
+
 }
 
 
 function initializeGame() {
+  // Reset game loop 
+  stillPlaying = true;
+
+  // Reset both hands to rock 
+  changeComputerHand('rock');
+  changePlayerHand('rock');
+
+  //Clear screen of all messages
+  const userMessages = document.querySelector('.game-text');
+  const userSubtext = document.querySelector('.game-subtext');
+  userMessages.textContent = "";
+  userSubtext.textContent = "";
+
   // Enable all buttons 
   const btns = document.querySelectorAll(".buttons");
   const strikeButton = document.querySelector(".strike-button");
