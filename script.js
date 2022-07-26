@@ -3,10 +3,10 @@ let stillPlaying = true;
 // Used to track index of intro screen text
 let i = 0;
 const introText = [
-  // "NYC: Sept 24, 2041..",
-  // "Willy and the dark warriors have once again captured Marian..",
-  // "This time, however, he's willing to fight you in a game of rock, paper, scissors...",
-  // "Prepare to fight..",
+  "NYC: Sept 24, 2041..",
+  "Willy and his thugs have captured Marianne..",
+  "And this time he's willing to fight you in a game of rock, paper, scissors...",
+  "Prepare to fight..",
 ];
 
 //TODO-1. Fix game buttons and reactivate them 
@@ -347,5 +347,5 @@ function initializeGame() {
 window.onload = loadGameOpening;
 
 // Put pause here before starting game 
-setTimeout(initializeGame);
+setTimeout(initializeGame, 25000);
 
