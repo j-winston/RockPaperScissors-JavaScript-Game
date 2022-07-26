@@ -116,8 +116,17 @@ footer {
     text-align: center;
     transition: 1s;
     max-width: 90vw;
-    
 }
+
+.restart-game {
+    color:rgb(135, 217, 255);
+    font-weight: 900;
+    font-size: 7rem;
+    text-align: center;
+    transition: 1s;
+    max-width: 90vw;
+}
+
 
 .credit-text {
     color:azure;

@@ -293,6 +293,15 @@ function initializeGame() {
   userMessages.textContent = "";
   userSubtext.textContent = "";
 
+  // Display kickstart message
+  userMessages.classList.add('restart-game');
+  userMessages.textContent = "LET'S DO IT!";
+  
+  // Get rid of kickstart message after a few sec
+  setTimeout(()=> { 
+    userMessages.classList.remove('restart-game');
+    userMessages.textContent = "";}, 3000);
+
   // Enable all buttons 
   const btns = document.querySelectorAll(".buttons");
   const strikeButton = document.querySelector(".strike-button");
@@ -320,7 +329,6 @@ function initializeGame() {
   // Rock scissors paper buttons
   const buttons = document.querySelectorAll(".buttons");
   buttons.forEach((button)=> button.classList.remove('.gray-wash'));
-  
   
   // Initialize new game stuff 
   // Give each player 5 bars of life
