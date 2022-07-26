@@ -9,9 +9,10 @@ const introText = [
   "Prepare to fight..",
 ];
 
-//TODO-1. Fix game buttons and reactivate them 
-//TODO-2. Clear game message screen
-//TODO-3. Fix game hands 
+//TODO-1. Display 'GAME OVER' if they press N
+
+
+
 
 function generateLifeBars() {
   const lifeBar = document.querySelector(".player-life-bar");
@@ -182,11 +183,18 @@ function playAgain() {
     const key = event.key;
     if (key.toLowerCase() == 'y'){
       initializeGame();
-    }else { 
-      //terminate game here
+    }else if(key.toLowerCase() == 'n') { 
+      showGameOver();
 
     }
   });
+
+}
+
+function showGameOver(){
+  const mesgBox = document.querySelector('.game-text');
+  mesgBox.classList.add('game-over');
+  mesgBox.textContent = "GAME OVER";
 
 }
 

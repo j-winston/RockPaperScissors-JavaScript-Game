@@ -44,6 +44,7 @@ footer {
 }
 
 
+
 .game-container {
     display:flex;
     justify-content: space-between;
@@ -108,8 +109,14 @@ footer {
 
 }
 
-.losing-text {
-    color:
+.game-over {
+    color:rgb(158, 16, 16);
+    font-weight: 900;
+    font-size: 9rem;
+    text-align: center;
+    transition: 1s;
+    max-width: 90vw;
+    
 }
 
 .credit-text {
@@ -118,6 +125,9 @@ footer {
     font-weight: 900;
 }
 
+.game-over {
+    color:rgb(143, 26, 49)
+}
 .life-container {
     display:flex;
     justify-content: space-around;
