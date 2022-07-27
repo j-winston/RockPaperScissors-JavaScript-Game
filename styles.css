@@ -1,4 +1,8 @@
 
+* {
+    font-family: "dePixel";
+    
+}
 body {
     /* background-image:  url("./assets/images/double-dragon-intro.png"); */
     
@@ -94,6 +98,7 @@ footer {
     max-width: 50vw;
     stroke: 5px black;
     text-align: center;
+    font-family: "dePixel";
 
 }
 
@@ -110,10 +115,10 @@ footer {
 
 .game-over {
     color:rgb(255, 255, 255);
+    font-family:"dePixel";
     font-weight: 900;
     font-size: 9rem;
     text-align: center;
-    transition: 1s;
     max-width: 60vw;
 }
 
@@ -228,4 +233,15 @@ footer {
     background-color: black;
     transition: 2s;
 }
+
+
+/* Custom Fonts */
+
+@font-face {
+    font-family:'dePixel';
+    src: url('./assets/Fonts/DePixelHalbfett.ttf') format('woff2');
+    src: url('./assets/Fonts/DePixelHalbfett.ttf') format('woff');
+
+}
+
 

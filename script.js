@@ -6,10 +6,10 @@ let gameTimer;
 // Used to track index of intro screen text
 let i = 0;
 const introText = [
-  // "NYC: Sept 24, 2041..",
-  // "Willy and his thugs have captured Marianne..",
-  // "And this time he's willing to fight you in a game of rock, paper, scissors...",
-  // "Prepare to fight..",
+  "NYC: Sept 24, 2041..",
+  "Willy and his thugs have captured Marianne..",
+  "And this time he's willing to fight you in a game of rock, paper, scissors...",
+  "Prepare to fight..",
 ];
 
 //TODO-1. Remove 'time' from intro screen
@@ -45,6 +45,9 @@ function typeWriter(index){
 function initializeGame() {
   // Reset game loop 
   stillPlaying = true;
+
+  // Kill timer just in case
+  killTimer(gameTimer);
 
   // Reset both hands to rock 
   changeComputerHand('rock');
@@ -357,10 +360,14 @@ function gameOverScreen(){
   clearScreen();
   killTimer(gameTimer);
 
-  const mesgBox = document.querySelector('.game-text');
-  mesgBox.classList.add('game-over');
-  mesgBox.textContent = "GAME OVER";
+  const gameOverBox = document.createElement('div');
+  const mesgContainer = document.querySelector('.message-container')
+  gameOverBox.classList.add('game-over');
+  gameOverBox.textContent = "GAME OVER";
+  mesgContainer.appendChild(gameOverBox);
+
 }
+
 
 
 function clearScreen(){
@@ -403,7 +410,8 @@ function killTimer(timer){
   clearTimeout(timer);
   // const countText = document.querySelector('.timer');
   const timerText = document.querySelector('.timer');
-  // countText.textContent = "";
+  const countText = document.querySelector('.countdown-text');
+  countText.textContent = "";
   timerText.textContent = "";
 
 }
@@ -412,5 +420,5 @@ function killTimer(timer){
 window.onload = loadGameOpening;
 
 // Pause for dramatic transition
-setTimeout(initializeGame, 1);
+setTimeout(initializeGame, 25000);
 
