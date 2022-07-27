@@ -1,5 +1,8 @@
 // Globals 
 let stillPlaying = true;
+// Used to kill timer later on
+let gameTimer; 
+
 // Used to track index of intro screen text
 let i = 0;
 const introText = [
@@ -111,7 +114,7 @@ function initializeGame() {
   playerHand.classList.add("fade-in");
 
   // Set up rock paper scissors buttons
-  buttons.forEach((button) => button.addEventListener("click", activateButton));
+  buttons.forEach((button) => button.addEventListener("click", showActiveButton));
 
   // Set up 'strike' button to play a round each click
   strikeButton.addEventListener("click", playRound);
@@ -119,6 +122,24 @@ function initializeGame() {
   // Start timer 
   CountDownTimer(25);
 
+}
+
+
+function CountDownTimer(timeRemaining){
+  const timerText = document.querySelector('.countdown-text');
+  const timerCount = document.querySelector('.timer');
+  if(timeRemaining >= 0) {
+  // Call timer every 1 second 
+
+  timerText.textContent = "TIME";
+  timerCount.textContent = `${timeRemaining}`;
+  gameTimer = setTimeout(CountDownTimer, 1000, --timeRemaining);
+  } else {
+    // kill the game and timer once its finished
+    timerText.textContent = "";
+    stillPlaying = false;
+    showEndingMessage("timeOut")
+  }
 }
 
 
@@ -161,7 +182,7 @@ function playRound() {
 
   // Decide winner and display message
   let winner = decideWinner(userHand, cpuHand);
-  displayMessage(winner, userHand, cpuHand);
+  showRoundResult(winner, userHand, cpuHand);
 
   // Reduce life of loser
   if (winner == "player") {
@@ -170,7 +191,8 @@ function playRound() {
     reduceLife("player");
   }
 
-  if (stillPlaying == false) displayEnding(winner);
+  // Check for loop kill switch!
+  if (stillPlaying == false) showEndingMessage(winner);
 }
 
 
@@ -236,21 +258,25 @@ function reduceLife(target) {
 
     // Set game to end if no lives
     const totalRemainingLives = lifeBar.querySelectorAll("div:not(.inactive)");
-    if (totalRemainingLives.length < 1) stillPlaying = false;
+    if (totalRemainingLives.length < 1) setGameToEnd();
   } else { // Reduce cpu life by 1
     const cpuLifeBar = document.querySelector(".cpu-life-bar");
     const cpuRemainingLife = cpuLifeBar.querySelector("div:not(.inactive)");
     cpuRemainingLife.classList.add("inactive");
- 
-    // End game if no more energy units
+    
+    // Set game to end if no more energy units
     const totalCpuRemainingLives =
       cpuLifeBar.querySelectorAll("div:not(.inactive)");
-    if (totalCpuRemainingLives.length < 1) stillPlaying = false;
+    if (totalCpuRemainingLives.length < 1) setGameToEnd();
   }
 }
 
+function setGameToEnd(){
+  stillPlaying = false;
+}
 
-function displayMessage(winner, playersHand, computersHand) {
+
+function showRoundResult(winner, playersHand, computersHand) {
   let result = "";
   let stat = "";
 
@@ -273,7 +299,7 @@ function displayMessage(winner, playersHand, computersHand) {
 }
 
 
-function activateButton(e) {
+function showActiveButton(e) {
   if (document.querySelector(".active-item")) {
     const prevItem = document.querySelector(".active-item");
     prevItem.classList.remove("active-item");
@@ -284,56 +310,61 @@ function activateButton(e) {
 }
 
 
-function displayEnding(winningPlayer) {
-  // Display end of game message
+function showEndingMessage(winningPlayer) {
   const message = document.querySelector(".game-text");
   const messageSubtext = document.querySelector(".game-subtext");
+  messageSubtext.textContent = "";
+
+  // Gray out background and disable buttons
+  deactivateInterface();
 
   // Display victory or defeat message
   if (winningPlayer == "computer") {
     message.textContent = "You're hurt, but don't give up! Think about Marianne";
   } else if (winningPlayer == "player") {
-    message.textContent = " Well done! With one last crushing blow, you defeat Willy.", 
+    message.textContent = "Well done! With one last crushing blow, you defeat Willy." + 
     "Hours later, you find Marianne, shaken but unhurt";
   }else if(winningPlayer == "timeOut") {
     message.textContent = "Time's up!";
     showGameOver();
-
   }
   
-  // Gray out background and disable buttons
-  deactivateInterface();
-
-  // Give option to continue
-  playAgain();
-}
-
-function playAgain() {
-  // display continue message 
-  const mesg = "Hit Y to continue, Q to quit";
-  document.querySelector('.game-text').textContent = mesg;
   
 
-  // Get user input 
-  document.addEventListener('keydown', (event)=> {
-
-    // Reset game if need be
-    const key = event.key;
-    if (key.toLowerCase() == 'y'){
-      initializeGame();
-    }else if(key.toLowerCase() == 'q') { 
-      showGameOver();
-
-    }
-  });
-
+  // Give option to continue
+  // playAgain();
 }
+
+// function playAgain() {
+//   // display continue message 
+//   const mesg = "Hit Y to continue, Q to quit";
+//   document.querySelector('.game-text').textContent = mesg;
+  
+
+//   // Get user input 
+//   document.addEventListener('keydown', (event)=> {
+
+//     // Reset game if need be
+//     const key = event.key;
+//     if (key.toLowerCase() == 'y'){
+//       initializeGame();
+//     }else if(key.toLowerCase() == 'q') { 
+//       showGameOver();
+
+//     }
+//   });
+
+// }
 
 
 function showGameOver(){
   const mesgBox = document.querySelector('.game-text');
+  // Clear screen text and display game over
+  mesgBox.textContent = "";
+
   mesgBox.classList.add('game-over');
   mesgBox.textContent = "GAME OVER";
+
 
 }
 
@@ -364,27 +395,12 @@ function deactivateInterface() {
   const buttons = document.querySelectorAll(".buttons");
   buttons.forEach((button) => button.classList.add("graywash"));
 
+  // Kill timer
+  clearTimeout(gameTimer);
+
 }
 
 
-
-
-function CountDownTimer(timeRemaining){
-  const timerText = document.querySelector('.countdown-text');
-  const timerCount = document.querySelector('.timer');
-  if(timeRemaining >= 0) {
-  // Call timer every 1 second 
-
-  timerText.textContent = "TIME";
-  timerCount.textContent = `${timeRemaining}`;
-  setTimeout(CountDownTimer, 1000, --timeRemaining);
-  } else {
-    // kill the game and timer once its finished
-    timerText.textContent = "";
-    stillPlaying = false;
-    displayEnding("timeOut")
-  }
-}
 
 
 // MAIN

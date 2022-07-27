@@ -93,6 +93,7 @@ footer {
     margin: 20px;
     max-width: 50vw;
     stroke: 5px black;
+    text-align: center;
 
 }
 
@@ -108,12 +109,12 @@ footer {
 }
 
 .game-over {
-    color:rgb(158, 16, 16);
+    color:rgb(255, 255, 255);
     font-weight: 900;
     font-size: 9rem;
     text-align: center;
     transition: 1s;
-    max-width: 90vw;
+    max-width: 60vw;
 }
 
 .restart-game {
@@ -132,9 +133,6 @@ footer {
     font-weight: 900;
 }
 
-.game-over {
-    color:rgb(143, 26, 49)
-}
 
 .countdown-container {
     display: flex; 
