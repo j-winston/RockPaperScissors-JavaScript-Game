@@ -128,17 +128,17 @@ function initializeGame() {
 function CountDownTimer(timeRemaining){
   const timerText = document.querySelector('.countdown-text');
   const timerCount = document.querySelector('.timer');
+
   if(timeRemaining >= 0) {
   // Call timer every 1 second 
-
   timerText.textContent = "TIME";
   timerCount.textContent = `${timeRemaining}`;
   gameTimer = setTimeout(CountDownTimer, 1000, --timeRemaining);
   } else {
     // kill the game and timer once its finished
     timerText.textContent = "";
-    stillPlaying = false;
-    showEndingMessage("timeOut")
+    setGameToEnd();
+    displayWinner("timeOut")
   }
 }
 
@@ -192,7 +192,7 @@ function playRound() {
   }
 
   // Check for loop kill switch!
-  if (stillPlaying == false) showEndingMessage(winner);
+  if (stillPlaying == false) displayWinner(winner);
 }
 
 
@@ -310,7 +310,7 @@ function showActiveButton(e) {
 }
 
 
-function showEndingMessage(winningPlayer) {
+function displayWinner(winningPlayer) {
   const message = document.querySelector(".game-text");
   const messageSubtext = document.querySelector(".game-subtext");
   messageSubtext.textContent = "";
@@ -323,48 +323,49 @@ function showEndingMessage(winningPlayer) {
     message.textContent = "You're hurt, but don't give up! Think about Marianne";
   } else if (winningPlayer == "player") {
     message.textContent = "Well done! With one last crushing blow, you defeat Willy." + 
-    "Hours later, you find Marianne, shaken but unhurt";
+    "Hours later, you find Marianne, shaken but unhurt.";
   }else if(winningPlayer == "timeOut") {
     message.textContent = "Time's up!";
-    showGameOver();
   }
   
-  
-
   // Give option to continue
-  // playAgain();
+  playAgain();
 }
 
-// function playAgain() {
-//   // display continue message 
-//   const mesg = "Hit Y to continue, Q to quit";
-//   document.querySelector('.game-text').textContent = mesg;
-  
 
-//   // Get user input 
-//   document.addEventListener('keydown', (event)=> {
+function playAgain() {
+  const mesg = "Hit Y to continue, Q to quit";
+  document.querySelector('.game-subtext').textContent = mesg;
 
-//     // Reset game if need be
-//     const key = event.key;
-//     if (key.toLowerCase() == 'y'){
-//       initializeGame();
-//     }else if(key.toLowerCase() == 'q') { 
-//       showGameOver();
+  // Get user input 
+  document.addEventListener('keydown', (event)=> {
 
-//     }
-//   });
+    // Reset game if need be
+    const key = event.key;
+    if (key.toLowerCase() == 'y'){
+      initializeGame();
+    }else if(key.toLowerCase() == 'q') { 
+      gameOverScreen();
 
-// }
+    }
+  });
+
+}
 
 
-function showGameOver(){
+function gameOverScreen(){
+  clearScreen();
+  killTimer(gameTimer);
+
   const mesgBox = document.querySelector('.game-text');
-  // Clear screen text and display game over
-  mesgBox.textContent = "";
-
   mesgBox.classList.add('game-over');
   mesgBox.textContent = "GAME OVER";
+}
 
+
+function clearScreen(){
+  document.querySelector('.game-text').textContent = "";
+  document.querySelector('.game-subtext').textContent = "";
 
 }
 
@@ -395,13 +396,17 @@ function deactivateInterface() {
   const buttons = document.querySelectorAll(".buttons");
   buttons.forEach((button) => button.classList.add("graywash"));
 
-  // Kill timer
-  clearTimeout(gameTimer);
-
 }
 
 
+function killTimer(timer){
+  clearTimeout(timer);
+  // const countText = document.querySelector('.timer');
+  const timerText = document.querySelector('.timer');
+  // countText.textContent = "";
+  timerText.textContent = "";
 
+}
 
 // MAIN
 window.onload = loadGameOpening;
