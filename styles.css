@@ -7,14 +7,16 @@ body {
     margin:0px;
     display:flex;
     flex-direction: column;
+    height: 100vh;
     
 }
 
 .background {
     background-image: url("./assets/images/double-dragon-intro.png"); 
-    background-size:contain;
-    background-repeat: no-repeat;
+    background-repeat: contain;
     background-color: black;
+    
+    
 }
 
 

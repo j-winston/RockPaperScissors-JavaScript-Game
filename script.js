@@ -157,9 +157,13 @@ function displayEnding(winningPlayer) {
   // Display victory or defeat message
   if (winningPlayer == "computer") {
     message.textContent = "You're hurt, but don't give up! Think about Marianne";
-  } else {
+  } else if (winningPlayer == "player") {
     message.textContent = " Well done! With one last crushing blow, you defeat Willy.", 
     "Hours later, you find Marianne, shaken but unhurt";
+  }else if(winningPlayer == "timeOut") {
+    message.textContent = "Time's up!";
+    showGameOver();
+
   }
   
   // Gray out background and disable buttons
@@ -356,7 +360,27 @@ function initializeGame() {
   // Set up 'strike' button to play a round each click
   strikeButton.addEventListener("click", playRound);
 
+  // Start timer 
+  CountDownTimer(25);
+
 }
+
+function CountDownTimer(timeRemaining){
+  const timerText = document.querySelector('.countdown-text');
+  if(timeRemaining >= 0) {
+  // Call timer every 1 second 
+  timerText.textContent = `TIME ${timeRemaining}`;
+  setTimeout(CountDownTimer, 1000, --timeRemaining);
+  } else {
+    // kill the game and timer once its finished
+    timerText.textContent = "";
+    stillPlaying = false;
+    displayEnding("timeOut")
+  }
+}
+
+
+
 
 // Main events
 
