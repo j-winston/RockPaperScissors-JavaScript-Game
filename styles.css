@@ -11,7 +11,7 @@ body {
     margin:0px;
     display:flex;
     flex-direction: column;
-    height: 100vh;
+    height: 50vh;
     
 }
 
@@ -83,23 +83,55 @@ footer {
 
 /* Game messages  */
 
-.message-container {
-    display:flex; 
-    align-items: center;
+
+.countdown-container {
+    display: flex; 
     flex-direction: column;
-    margin: 0px;
+    align-items: center;
 
 }
 
-.game-text,
-.game-subtext {
-    color:rgb(255, 252, 68);
-    margin: 20px;
-    max-width: 50vw;
-    stroke: 5px black;
-    text-align: center;
-    font-family: "dePixel";
+.timer {
+    color:rgb(168, 255, 255);
+    font-size: 5vh;
+    align-self: center;
+}
 
+.message-container {
+    
+}
+
+.countdown-box {
+    display: flex;
+    gap: 10px;
+    
+}
+
+.game-text {
+    color:rgb(255, 252, 68);
+        font-family: "dePixel";
+        font-size: 4em;
+        text-align: center;
+        
+       
+    }
+        
+
+.game-subtext
+ {
+    color:rgb(255, 252, 68);
+    font-size: 2em;
+    font-family: "dePixel";
+    text-align: center;
+    
+    
+}
+
+.ending-text {
+    color:rgb(255, 252, 68);
+    font-size: 2em;
+    font-family: "dePixel";
+    text-align: center;
 }
 
 
@@ -108,27 +140,23 @@ footer {
     font-size: 5vh;
 }
 
-.timer {
-    color:rgb(168, 255, 255);
-    font-size: 5vh;
-}
+
 
 .game-over {
     color:rgb(255, 255, 255);
     font-family:"dePixel";
     font-weight: 900;
     font-size: 9rem;
-    text-align: center;
     max-width: 60vw;
+    text-align: center;
 }
 
 .restart-game {
     color:rgb(255, 252, 68);
     font-weight: 900;
-    font-size: 7rem;
+    font-size: 4em;
+    transition: 3s;
     text-align: center;
-    transition: 1s;
-    max-width: 90vw;
 }
 
 
@@ -138,12 +166,6 @@ footer {
     font-weight: 900;
 }
 
-
-.countdown-container {
-    display: flex; 
-    justify-content: center;
-    gap: 10px;
-}
 
  /* Energy Bars */
 

@@ -6,10 +6,10 @@ let gameTimer;
 // Used to track index of intro screen text
 let i = 0;
 const introText = [
-  "NYC: Sept 24, 2041..",
-  "Willy and his thugs have captured Marianne..",
-  "And this time he's willing to fight you in a game of rock, paper, scissors...",
-  "Prepare to fight..",
+  // "NYC: Sept 24, 2041..",
+  // "Willy and his thugs have captured Marianne..",
+  // "And this time he's willing to fight you in a game of rock, paper, scissors...",
+  // "Prepare to fight..",
 ];
 
 //TODO-1. Remove 'time' from intro screen
@@ -68,7 +68,6 @@ function initializeGame() {
   
   // Get rid of kickstart message after a few sec
   setTimeout(()=> { 
-    userMessages.classList.remove('restart-game');
     userMessages.textContent = "";}, 3000);
 
   // Enable all buttons 
@@ -291,7 +290,7 @@ function showRoundResult(winner, playersHand, computersHand) {
     stat = `${playersHand.toUpperCase()} beats ${computersHand}!`;
   } else if (winner == "tie") {
     result = "Tie round.";
-    stat = "Run it back!";
+    stat = "Try again!";
   } else {
     result = "You lose!";
     stat = `${computersHand.toUpperCase()} beats ${playersHand}!`;
@@ -324,6 +323,7 @@ function displayWinner(winningPlayer) {
   // Gray out background and disable buttons
   deactivateInterface();
 
+  message.classList.add('ending-text');
   // Display victory or defeat message
   if (winningPlayer == "computer") {
     message.textContent = "You're hurt, but don't give up! Think about Marianne";
@@ -362,10 +362,10 @@ function playAgain() {
 function gameOverScreen(){
   clearScreen();
   killTimer(gameTimer);
+ 
+  document.querySelector('.credit-text').textContent = "INSERT COIN";
 
-  document.querySelector('.credit-text') = "INSERT COIN";
-
-  const gameOverBox = document.createElement('div');
+  const gameOverBox = document.createElement('p');
   const mesgContainer = document.querySelector('.message-container')
   gameOverBox.classList.add('game-over');
   gameOverBox.textContent = "GAME OVER";
@@ -425,5 +425,5 @@ function killTimer(timer){
 window.onload = loadGameOpening;
 
 // Pause for dramatic transition
-setTimeout(initializeGame, 25000);
+setTimeout(initializeGame, 1);
 
