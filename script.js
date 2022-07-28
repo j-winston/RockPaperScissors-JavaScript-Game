@@ -53,6 +53,9 @@ function initializeGame() {
   changeComputerHand('rock');
   changePlayerHand('rock');
 
+  // Add 1 player credit
+  document.querySelector('.credit-text').textContent = "0 CREDIT"
+
   //Clear screen of all messages
   const userMessages = document.querySelector('.game-text');
   const userSubtext = document.querySelector('.game-subtext');
@@ -359,6 +362,8 @@ function playAgain() {
 function gameOverScreen(){
   clearScreen();
   killTimer(gameTimer);
+
+  document.querySelector('.credit-text') = "INSERT COIN";
 
   const gameOverBox = document.createElement('div');
   const mesgContainer = document.querySelector('.message-container')
