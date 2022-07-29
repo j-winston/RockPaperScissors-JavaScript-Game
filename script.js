@@ -68,7 +68,7 @@ function initializeGame() {
   
   // Get rid of kickstart message after a few sec
   setTimeout(()=> { 
-    userMessages.textContent = "";}, 3000);
+    userMessages.textContent = "";userMessages.classList.remove('restart-game')}, 3000);
 
   // Enable all buttons 
   const btns = document.querySelectorAll(".buttons");
