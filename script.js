@@ -322,6 +322,7 @@ function displayWinner(winningPlayer) {
 
   // Gray out background and disable buttons
   deactivateInterface();
+  killTimer(gameTimer);
 
   message.classList.add('ending-text');
   // Display victory or defeat message
