@@ -1,11 +1,13 @@
 
 * {
     font-family: "dePixel";
+    box-sizing: border-box;
     
 }
 body {
     background-color: black;
     margin:0px;
+   
     
    
 }
@@ -16,11 +18,15 @@ body {
     max-width: 75vw;
     margin-left: auto;
     margin-right: auto;
+    border: 2px solid white; 
 
 
 
 }
 
+#header {
+    height: 10vh;
+}
 .background {
     background-image: url("./assets/images/double-dragon-intro.png"); 
     background-repeat: contain;
