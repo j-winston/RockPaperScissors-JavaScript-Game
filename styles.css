@@ -48,37 +48,51 @@ footer {
 
 
 .player-hand {
-    width:25vw;
+    width: 20vw;
     visibility: hidden;
+    
+    
+}
 
+img {
+    margin:0px;
+    padding:0px;
 }
 
 .computer-hand {
-    width: 25vw;
+    width: 20vw;
     visibility: hidden;
 
+  
+    
+
 }
-
-
 
 .game-container {
     display:flex;
-    justify-content: space-between;
-    width: 200px;
-    margin-top: 30%;
+    margin-top: 10%;
     visibility: hidden;
-    flex-basis: ;
+    justify-content: space-between;
     
-
     
 }
+
 
 
  /* Buttons */
 .buttons {
     background-color:goldenrod;
     align-self: flex-end;
+    
 }
+
+
+.button-container {
+    display:flex;
+
+    
+}
+
 
 .strike-button-container {
     display:flex;
@@ -86,9 +100,6 @@ footer {
     visibility:hidden;
 }
 
-.button-container {
-    display:flex;
-}
 
 .active-item {
     background-color: violet;
