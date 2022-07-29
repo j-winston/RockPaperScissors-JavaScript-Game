@@ -42,13 +42,13 @@ footer {
 
 
 .player-hand {
-    
+    width:25vw;
     visibility: hidden;
 
 }
 
 .computer-hand {
-    max-height:60%;
+    width: 25vw;
     visibility: hidden;
 
 }
@@ -58,8 +58,11 @@ footer {
 .game-container {
     display:flex;
     justify-content: space-between;
+    width: 200px;
     margin-top: 30%;
     visibility: hidden;
+    flex-basis: ;
+    
 
     
 }
