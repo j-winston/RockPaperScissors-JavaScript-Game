@@ -56,11 +56,10 @@ function initializeGame() {
   // Add 1 player credit
   document.querySelector('.credit-text').textContent = "0 CREDIT"
 
-  //Clear screen of all messages
+  // //Clear screen of all messages
   const userMessages = document.querySelector('.game-text');
   const userSubtext = document.querySelector('.game-subtext');
-  userMessages.textContent = "";
-  userSubtext.textContent = "";
+  clearScreen();
 
   // Display kickstart message
   userMessages.classList.add('restart-game');
@@ -316,15 +315,16 @@ function showActiveButton(e) {
 
 
 function displayWinner(winningPlayer) {
-  const message = document.querySelector(".game-text");
+
+  const message = document.querySelector(".ending-text");
   const messageSubtext = document.querySelector(".game-subtext");
-  messageSubtext.textContent = "";
+  
 
   // Gray out background and disable buttons
   deactivateInterface();
   killTimer(gameTimer);
 
-  message.classList.add('ending-text');
+  // message.classList.add('ending-text');
   // Display victory or defeat message
   if (winningPlayer == "computer") {
     message.textContent = "You're hurt, but don't give up! Think about Marianne";
@@ -363,22 +363,21 @@ function playAgain() {
 function gameOverScreen(){
   clearScreen();
   killTimer(gameTimer);
- 
-  document.querySelector('.credit-text').textContent = "INSERT COIN";
 
-  const gameOverBox = document.createElement('p');
-  const mesgContainer = document.querySelector('.message-container')
-  gameOverBox.classList.add('game-over');
-  gameOverBox.textContent = "GAME OVER";
-  mesgContainer.appendChild(gameOverBox);
+  document.querySelector('.credit-text').textContent = "INSERT COIN";
+  document.querySelector('.game-over').textContent = "GAME OVER";
+
+
 
 }
 
 
 
 function clearScreen(){
-  document.querySelector('.game-text').textContent = "";
-  document.querySelector('.game-subtext').textContent = "";
+  const mesgNodes = document.querySelector('.message-container').childNodes;
+  mesgNodes.forEach((node)=>node.textContent="");
+
+
 
 }
 

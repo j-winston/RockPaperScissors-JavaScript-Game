@@ -99,7 +99,13 @@ footer {
 }
 
 .message-container {
-    
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: 75%;
+    gap: 20px;
+    line-height: 90px;
+    font-family: "dePixel";
 }
 
 .countdown-box {
@@ -109,10 +115,10 @@ footer {
 }
 
 .game-text {
-    color:rgb(255, 252, 68);
-        font-family: "dePixel";
-        font-size: 4em;
+    color:rgb(255, 255, 255);
+        font-size: 2em;
         text-align: center;
+        margin:0px;
         
        
     }
@@ -120,19 +126,18 @@ footer {
 
 .game-subtext
  {
-    color:rgb(255, 252, 68);
-    font-size: 2em;
-    font-family: "dePixel";
+    color:rgb(255, 255, 255);
+    font-size: 1em;
     text-align: center;
-    
-    
+    margin:0px;
 }
 
 .ending-text {
-    color:rgb(255, 252, 68);
-    font-size: 1em;
-    font-family: "dePixel";
+    color:rgb(247, 255, 94);
+    font-size: 2em;
+    
     text-align: center;
+    margin:0px;
 }
 
 
@@ -147,9 +152,10 @@ footer {
     color:rgb(255, 255, 255);
     font-family:"dePixel";
     font-weight: 900;
-    font-size: 9rem;
+    font-size: 5rem;
     max-width: 60vw;
     text-align: center;
+    margin:0px;
 }
 
 .restart-game {
