@@ -9,60 +9,65 @@
 </head>
 
 <body>
-    <div class="background">
-    <!-- Header -->
-    
-
-        <!-- Scoreboard -->
-        <div class="countdown-container">
-            <div class="countdown-box">
-                <h1 class="countdown-text"></h1>
-                <h1 class="timer"></h1>
-            </div>
-            
-            <div class="message-container">
-                <p class="ending-text"></p>
-                <p class="game-text"></p>
-                <p class="game-subtext"></p>
-                <p class="game-over"></p>
-                
-            </div>
-        </div>
-
-        <!-- Gameplay messages-->
-
+    <div id="main-container">
+        <!-- Header -->
+        <header id="header">
+        </header>
+        <div class="background">
+        
         
 
-        <!-- Content -->
-
-        <div class="game-container">
-            
-            <img src="./assets/images/player/player-rock.png" class="player-hand">
-                <div class="button-container">
-                    <button class="buttons" id="rock">Rock</button>
-                    <button class="buttons" id="scissors">Scissors</button>
-                    <button class="buttons" id="paper">Paper</button>
+            <!-- Scoreboard -->
+            <div class="countdown-container">
+                <div class="countdown-box">
+                    <h1 class="countdown-text"></h1>
+                    <h1 class="timer"></h1>
                 </div>
+                
+                <div class="message-container">
+                    <p class="ending-text"></p>
+                    <p class="game-text"></p>
+                    <p class="game-subtext"></p>
+                    <p class="game-over"></p>
+                    
+                </div>
+            </div>
+
+            <!-- Gameplay messages-->
+
             
-            <img src="./assets/images/computer/computer-rock.png" class="computer-hand"> 
-        </div>
 
-        <div class="strike-button-container">
-            <button class="strike-button">Strike!</button>
-        </div>
+            <!-- Content -->
 
-        <!-- Life bars  -->
-        <footer>
-                <div class="life-container">
-                    <div class="player-life-bar">
+            <div class="game-container">
+                
+                <img src="./assets/images/player/player-rock.png" class="player-hand">
+                    <div class="button-container">
+                        <button class="buttons" id="rock">Rock</button>
+                        <button class="buttons" id="scissors">Scissors</button>
+                        <button class="buttons" id="paper">Paper</button>
                     </div>
+                
+                <img src="./assets/images/computer/computer-rock.png" class="computer-hand"> 
+            </div>
 
-                    <p class="credit-text blink">INSERT COIN</p>
-                    <div class="cpu-life-bar"></div>
-                </div>
-        </footer>
+            <div class="strike-button-container">
+                <button class="strike-button">Strike!</button>
+            </div>
 
-        <script src="./script.js"></script>
-    </div> 
+            <!-- Life bars  -->
+            <footer>
+                    <div class="life-container">
+                        <div class="player-life-bar">
+                        </div>
+
+                        <p class="credit-text blink">INSERT COIN</p>
+                        <div class="cpu-life-bar"></div>
+                    </div>
+            </footer>
+
+            <script src="./script.js"></script>
+        </div> 
+</div> 
 </body>
 </html>
