@@ -404,9 +404,9 @@ function deactivateInterface() {
   document.querySelector(".player-hand").classList.add("graywash");
   document.querySelector(".computer-hand").classList.add("graywash");
 
-  // Gray out buttons
-  const buttons = document.querySelectorAll(".buttons");
-  buttons.forEach((button) => button.classList.add("graywash"));
+  // // Gray out buttons
+  // const buttons = document.querySelectorAll(".buttons");
+  // buttons.forEach((button) => button.classList.add("graywash"));
 
 }
 

@@ -5,7 +5,7 @@
     
 }
 body {
-    background-color: black;
+    background-color: rgb(66, 66, 66);
     margin:0px;
    
     
@@ -81,14 +81,22 @@ img {
 
  /* Buttons */
 .buttons {
-    background-color:goldenrod;
-    align-self: flex-end;
+    /* background-color:goldenrod; */
+    /* align-self: flex-end; */
+    border-radius: 50%;
+    width:100px;
+    height:100px; 
+    border:0px;
     
+   
 }
 
 
 .button-container {
     display:flex;
+    justify-content: center;
+    gap:30px;
+    margin-top: 30px;
 
     
 }
@@ -102,10 +110,34 @@ img {
 
 
 .active-item {
-    background-color: violet;
+    /* background-color: violet; */
 }
 
+.rock-button {
+    background-color: rgb(17, 19, 122);
+    color:white;
+    box-shadow: 0px 3px 8px rgb(25, 25, 25), inset 0px 2px 3px rgb(195, 192, 192);
+}
 
+.rock-button:active,
+.scissors-button:active,
+.paper-button:active {
+    transform: scale(.97);
+    box-shadow: 0px 2px 5px rgb(25, 25, 25), inset 0px 1px 2px rgb(195, 192, 192);
+
+}
+
+.scissors-button {
+    background-color: rgb(209, 5, 5);
+    color:white;
+    box-shadow: 0px 3px 8px rgb(25, 25, 25), inset 0px 2px 3px rgb(195, 192, 192);
+}
+
+.paper-button {
+    background-color: rgb(0, 0, 0);
+    color:white;
+    box-shadow: 0px 3px 8px rgb(25, 25, 25), inset 0px 2px 3px rgb(98, 98, 98);
+}
 /* Game messages  */
 
 
