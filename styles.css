@@ -41,9 +41,12 @@ body {
 
 
 footer {
-    min-height: 30px;
-    background-color: black;
-    margin-top: auto;
+    
+    color:white;
+    font-size: 10px;
+    padding-top: 6vh;
+
+    text-align: center;
 }
 
 
