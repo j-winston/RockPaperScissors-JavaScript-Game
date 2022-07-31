@@ -4,28 +4,29 @@
     box-sizing: border-box;
     
 }
+
 body {
     background-color: rgb(66, 66, 66);
+    background-size: contain;
     margin:0px;
-   
-    
-   
 }
+
+
+
 
 #main-container{
     display:flex;
     flex-direction: column;
-    max-width: 75vw;
+    max-width: 60vw;
     margin-left: auto;
     margin-right: auto;
-    border: 2px solid white; 
-
-
+    border: 1px solid rgb(255, 255, 255); 
 
 }
 
+
 #header {
-    height: 5vh;
+    height: 3vh;
 }
 .background {
     background-image: url("./assets/images/double-dragon-intro.png"); 
@@ -44,7 +45,6 @@ footer {
     
     color:white;
     font-size: 6px;
-    padding-top: 7vh;
 
     text-align: center;
 }
@@ -65,9 +65,6 @@ img {
 .computer-hand {
     width: 20vw;
     visibility: hidden;
-
-  
-    
 
 }
 
@@ -109,11 +106,12 @@ img {
     display:flex;
     justify-content: center;
     visibility:hidden;
+    margin-top:2vh;
 }
 
 
 .active-item {
-    /* background-color: violet; */
+    border:2px solid white;
 }
 
 .rock-button {
@@ -125,9 +123,11 @@ img {
 
 .rock-button:active,
 .scissors-button:active,
-.paper-button:active {
+.paper-button:active,
+.strike-button:active {
     transform: scale(.97);
     box-shadow: 0px 2px 5px rgb(25, 25, 25), inset 0px 1px 2px rgb(195, 192, 192);
+
 
 }
 
@@ -138,9 +138,21 @@ img {
 }
 
 .paper-button {
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(47, 47, 47);
     color:white;
     box-shadow: 0px 3px 8px rgb(25, 25, 25), inset 0px 2px 3px rgb(98, 98, 98);
+}
+
+.strike-button {
+    border-radius: 50%;
+    width:145px;
+    height:145px; 
+    border:0px;
+
+    background-color: rgb(194, 145, 21);
+    color:rgb(255, 255, 255);
+    box-shadow: 0px 3px 8px rgb(25, 25, 25), inset 0px 2px 3px rgb(98, 98, 98);
+    
 }
 /* Game messages  */
 
@@ -229,9 +241,10 @@ img {
 
 
 .credit-text {
-    color:azure;
+    color:rgb(255, 255, 255);
     text-transform: uppercase;
     font-weight: 900;
+    font-size: 2em;
 }
 
 
@@ -240,6 +253,7 @@ img {
 .life-container {
     display:flex;
     justify-content: space-around;
+    margin-bottom: 4vh;
 
 }
 

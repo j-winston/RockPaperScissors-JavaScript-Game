@@ -376,9 +376,6 @@ function gameOverScreen(){
 function clearScreen(){
   const mesgNodes = document.querySelector('.message-container').childNodes;
   mesgNodes.forEach((node)=>node.textContent="");
-
-
-
 }
 
 
