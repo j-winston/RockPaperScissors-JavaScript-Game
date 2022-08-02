@@ -418,9 +418,50 @@ function killTimer(timer){
 
 }
 
+
+
+
+
+
+function musicToggle(){
+ 
+
+  backgroundMusic.src = "assets/music/boss-time.mp3"
+  backgroundMusic.pause();
+  backgroundMusic.currentTime = 0;
+
+  const elClassList = this.classList;
+
+  // Toggle music on  
+  if(elClassList.contains('fa-volume-xmark')){
+      elClassList.remove('fa-volume-xmark');
+      elClassList.add('fa-volume-high');
+      backgroundMusic.play();
+
+    // Toggle music off
+  } else {
+    elClassList.remove('fa-volume-high');
+    elClassList.add('fa-volume-xmark');
+    backgroundMusic.pause();
+    backgroundMusic.currentTime = 0;
+
+  }
+  
+  
+}
+
+
 // MAIN
 window.onload = loadGameOpening;
 
 // Pause for dramatic transition
 setTimeout(initializeGame, 1);
+
+// Set background tunes
+let backgroundMusic = document.createElement("audio");
+backgroundMusic.setAttribute("preload", "auto");
+
+// // Add event listener to music button
+const elMusicToggle = document.querySelector('.start-music')
+elMusicToggle.addEventListener('click', musicToggle);
 

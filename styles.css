@@ -144,8 +144,8 @@ img {
 
 .strike-button {
     border-radius: 50%;
-    width:145px;
-    height:145px; 
+    width:120px;
+    height:120px; 
     border:0px;
 
     background-color: rgb(194, 145, 21);
@@ -372,4 +372,21 @@ img {
 
 }
 
+
+/* Sound Toggle */
+
+.start-music {
+    color:white;
+    font-size:4vw;
+    margin-left:70vw;
+    opacity:.3
+}
+
+.start-music:hover {
+    opacity:.6
+}
+
+.start-music:active {
+    transform: scale(.97);
+}
 
