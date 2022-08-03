@@ -7,11 +7,18 @@ let gameTimer;
 // Used to track index of intro screen text
 let i = 0;
 const introText = [
-  // "NYC: Sept 24, 2041..",
-  // "Willy and his thugs have captured Marianne..",
-  // "And this time he's willing to fight you in a game of rock, paper, scissors...",
-  // "Prepare to fight..",
+  "NYC: Sept 24, 2041..",
+  "Willy and his thugs have captured Marianne..",
+  "And this time he's willing to fight you in a game of rock, paper, scissors...",
+  "Prepare to fight..",
 ];
+
+const songList = {
+  "intro":"assets/music/a-bit-of-hope.mp3",
+  "action-time":"assets/music/boss-time.mp3",
+  "ending": "assets/music/8-bit-adventure-fesliyanstudios.mp3"
+   };
+
 
 //TODO-1. Remove 'time' from intro screen
 // TODO-2. Add 'You've been hurt. Don't give up! 
@@ -124,12 +131,11 @@ function initializeGame() {
   // Set up 'strike' button to play a round each click
   strikeButton.addEventListener("click", playRound);
 
-  // // Add event listener to music button
-  const elMusicToggle = document.querySelector('.toggle-music');
-  elMusicToggle.addEventListener('click', musicBox.toggle);
-
   // Start timer 
   CountDownTimer(25);
+
+  // Start game music 
+  musicBox.play("action-time");
 
 }
 
@@ -481,29 +487,33 @@ function jukeBox(){
 
   function loadSong(scene){
     elAudio.src = soundBank[scene];
+    elAudio.setAttribute("preload", "auto");
   }
 
   return { toggle, play, addSong, addSongs, loadSong}
 
 }
 
-const songList = {
-  "intro":"assets/music/a-bit-of-hope.mp3",
-  "action-time":"assets/music/boss-time.mp3",
-  "ending": "assets/music/8-bit-adventure-fesliyanstudios.mp3"
-   };
 
 // MAIN
+
+// Load intro and transition
 window.onload = loadGameOpening;
+setTimeout(initializeGame, 25000);
 
-// Pause for dramatic transition
-setTimeout(initializeGame, 1);
-
+// Feed songs to audio engine 
 const musicBox = jukeBox();
-
 musicBox.addSongs(songList);
 
-musicBox.loadSong('ending');
+ // // Add event listener to music button
+ const elMusicToggle = document.querySelector('.toggle-music');
+ elMusicToggle.addEventListener('click', musicBox.toggle);
+
+// Load intro music 
+musicBox.loadSong('intro')
+
+
+
 
 
 
