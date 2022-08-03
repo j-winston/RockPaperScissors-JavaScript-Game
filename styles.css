@@ -375,18 +375,18 @@ img {
 
 /* Sound Toggle */
 
-.start-music {
+.toggle-music {
     color:white;
     font-size:4vw;
     margin-left:70vw;
     opacity:.3
 }
 
-.start-music:hover {
+.toggle-music:hover {
     opacity:.6
 }
 
-.start-music:active {
+.toggle-music:active {
     transform: scale(.97);
 }
 

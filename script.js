@@ -423,45 +423,68 @@ function killTimer(timer){
 
 
 
-function musicToggle(){
- 
+function jukeBox(){
 
-  backgroundMusic.src = "assets/music/boss-time.mp3"
-  backgroundMusic.pause();
-  backgroundMusic.currentTime = 0;
+  const elAudio = document.createElement("audio");
+  elAudio.src = "/assets/music/boss-time.mp3";
+  elAudio.setAttribute("preload", "auto");
 
-  const elClassList = this.classList;
 
-  // Toggle music on  
-  if(elClassList.contains('fa-volume-xmark')){
-      elClassList.remove('fa-volume-xmark');
-      elClassList.add('fa-volume-high');
-      backgroundMusic.play();
+  function toggle(){
 
-    // Toggle music off
-  } else {
-    elClassList.remove('fa-volume-high');
-    elClassList.add('fa-volume-xmark');
-    backgroundMusic.pause();
-    backgroundMusic.currentTime = 0;
+    const elClassList = this.classList;
+    // Toggle music on
+    if(elClassList.contains('fa-volume-xmark')){
+        elClassList.remove('fa-volume-xmark');
+        elClassList.add('fa-volume-high');
+        play();
+
+      // Toggle music off
+    } else {
+      elClassList.remove('fa-volume-high');
+      elClassList.add('fa-volume-xmark');
+      pause();
+    }
+  }
+
+  function play(){
+    elAudio.play();
+  }
+
+  function pause() {
+    elAudio.pause();
+  }
+
+  function load(src) {
+    
 
   }
-  
+  return { toggle, play, load}
+
+
   
 }
 
+// function playSong(mObject, file) {
+//   mObject.src =  file;
+//   mObject.setAttribute("preload", "auto")
+//   mObject.play();
 
+// }
 // MAIN
 window.onload = loadGameOpening;
 
 // Pause for dramatic transition
 setTimeout(initializeGame, 1);
 
-// Set background tunes
-let backgroundMusic = document.createElement("audio");
-backgroundMusic.setAttribute("preload", "auto");
+// // Set background tunes
+// let elMusic = document.createElement("audio");
+
+// playSong(elMusic, "assets/music/boss-time.mp3");
+// USER NEEDS TO INTERACT FIRST 
+
+const musicBox = jukeBox();
 
 // // Add event listener to music button
-const elMusicToggle = document.querySelector('.start-music')
-elMusicToggle.addEventListener('click', musicToggle);
-
+const elMusicToggle = document.querySelector('.toggle-music')
+elMusicToggle.addEventListener('click', musicBox.toggle);
