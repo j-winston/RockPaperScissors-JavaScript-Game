@@ -1,3 +1,4 @@
+
 // Globals 
 let stillPlaying = true;
 // Used to kill timer later on
@@ -122,6 +123,10 @@ function initializeGame() {
 
   // Set up 'strike' button to play a round each click
   strikeButton.addEventListener("click", playRound);
+
+  // // Add event listener to music button
+  const elMusicToggle = document.querySelector('.toggle-music');
+  elMusicToggle.addEventListener('click', musicBox.toggle);
 
   // Start timer 
   CountDownTimer(25);
@@ -430,7 +435,6 @@ function jukeBox(){
   let nowPlaying = '';
   
   function toggle(){
-
     const elClassList = this.classList;
     // Toggle music on
     if(elClassList.contains('fa-volume-xmark')){
@@ -467,11 +471,27 @@ function jukeBox(){
     elAudio.src = src;
     elAudio.setAttribute("preload", "auto");
   }
+  
+  function addSongs(songList) {
+    for(let scene in songList) {
+      soundBank[scene] = songList[scene]
+    }
+      
+    }
 
+  function loadSong(scene){
+    elAudio.src = soundBank[scene];
+  }
 
-  return { toggle, play, addSong}
+  return { toggle, play, addSong, addSongs, loadSong}
 
 }
+
+const songList = {
+  "intro":"assets/music/a-bit-of-hope.mp3",
+  "action-time":"assets/music/boss-time.mp3",
+  "ending": "assets/music/8-bit-adventure-fesliyanstudios.mp3"
+   };
 
 // MAIN
 window.onload = loadGameOpening;
@@ -481,11 +501,10 @@ setTimeout(initializeGame, 1);
 
 const musicBox = jukeBox();
 
-// add song 
-musicBox.addSong("assets/music/a-bit-of-hope.mp3", "intro");
+musicBox.addSongs(songList);
 
-// // Add event listener to music button
-const elMusicToggle = document.querySelector('.toggle-music');
-elMusicToggle.addEventListener('click', musicBox.toggle);
+musicBox.loadSong('ending');
+
+
 
 
