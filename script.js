@@ -426,10 +426,9 @@ function killTimer(timer){
 function jukeBox(){
 
   const elAudio = document.createElement("audio");
-  elAudio.src = "/assets/music/boss-time.mp3";
-  elAudio.setAttribute("preload", "auto");
-
-
+  const soundBank = {};
+  let nowPlaying = '';
+  
   function toggle(){
 
     const elClassList = this.classList;
@@ -437,7 +436,7 @@ function jukeBox(){
     if(elClassList.contains('fa-volume-xmark')){
         elClassList.remove('fa-volume-xmark');
         elClassList.add('fa-volume-high');
-        play();
+        elAudio.play();
 
       // Toggle music off
     } else {
@@ -447,44 +446,46 @@ function jukeBox(){
     }
   }
 
-  function play(){
-    elAudio.play();
+  function play(scene){
+    if(soundBank[scene]) {
+      elAudio.src = soundBank[scene];
+      elAudio.play();
+      nowPlaying = scene;
+    }else {
+      console.log("scene doesn't exist");
+
+    }
+    
   }
 
   function pause() {
     elAudio.pause();
   }
 
-  function load(src) {
-    
-
+  function addSong(src, scene) {
+    soundBank[scene] = src;
+    elAudio.src = src;
+    elAudio.setAttribute("preload", "auto");
   }
-  return { toggle, play, load}
 
 
-  
+  return { toggle, play, addSong}
+
 }
 
-// function playSong(mObject, file) {
-//   mObject.src =  file;
-//   mObject.setAttribute("preload", "auto")
-//   mObject.play();
-
-// }
 // MAIN
 window.onload = loadGameOpening;
 
 // Pause for dramatic transition
 setTimeout(initializeGame, 1);
 
-// // Set background tunes
-// let elMusic = document.createElement("audio");
-
-// playSong(elMusic, "assets/music/boss-time.mp3");
-// USER NEEDS TO INTERACT FIRST 
-
 const musicBox = jukeBox();
 
+// add song 
+musicBox.addSong("assets/music/a-bit-of-hope.mp3", "intro");
+
 // // Add event listener to music button
-const elMusicToggle = document.querySelector('.toggle-music')
+const elMusicToggle = document.querySelector('.toggle-music');
 elMusicToggle.addEventListener('click', musicBox.toggle);
+
+
