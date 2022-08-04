@@ -9,8 +9,8 @@ let i = 0;
 const introText = [
   "NYC: Sept 24, 2041..",
   "Willy and his thugs have captured Marianne..",
-  "And this time he's willing to fight you in a game of rock, paper, scissors...",
-  "Prepare to fight..",
+  "You'll have to fight him with your hands to save her...",
+  "Get ready..",
 ];
 
 const songList = {
@@ -134,8 +134,13 @@ function initializeGame() {
   // Start timer 
   CountDownTimer(25);
 
+  // fade out music 
+  musicBox.fadeOut(4);
+
   // Start game music 
-  musicBox.play("action-time");
+  musicBox.loadSong("action-time");
+
+ 
 
 }
 
@@ -446,13 +451,15 @@ function jukeBox(){
     if(elClassList.contains('fa-volume-xmark')){
         elClassList.remove('fa-volume-xmark');
         elClassList.add('fa-volume-high');
-        elAudio.play();
+        // elAudio.play();
+        elAudio.volume = .5;
 
       // Toggle music off
     } else {
       elClassList.remove('fa-volume-high');
       elClassList.add('fa-volume-xmark');
-      pause();
+      elAudio.volume = 0;
+      // pause();
     }
   }
 
@@ -472,13 +479,13 @@ function jukeBox(){
     elAudio.pause();
   }
 
-  function addSong(src, scene) {
+  function addNewSong(src, scene) {
     soundBank[scene] = src;
     elAudio.src = src;
     elAudio.setAttribute("preload", "auto");
   }
   
-  function addSongs(songList) {
+  function addNewSongs(songList) {
     for(let scene in songList) {
       soundBank[scene] = songList[scene]
     }
@@ -488,9 +495,28 @@ function jukeBox(){
   function loadSong(scene){
     elAudio.src = soundBank[scene];
     elAudio.setAttribute("preload", "auto");
+    elAudio.play();
+    elAudio.volume = 0;
   }
 
-  return { toggle, play, addSong, addSongs, loadSong}
+  function fadeOut(count) {
+    currentVol = elAudio.volume;
+    let volReduction =   -1 / count; 
+    volReduction = Number.parseFloat(volReduction).toFixed(2);
+    timerID = setInterval(reduceVolume, 1000);
+
+    function reduceVolume(volReduction){
+      if(elAudio.volume > 0){
+      elAudio.setVolume(elAudio.volume - volReduction);
+      }else{
+        // Kill timer once volume hits 0
+        clearInterval(timerID);
+      }
+    }
+    
+  }
+
+  return { toggle, play, addNewSong, addNewSongs, loadSong, fadeOut}
 
 }
 
@@ -499,18 +525,21 @@ function jukeBox(){
 
 // Load intro and transition
 window.onload = loadGameOpening;
-setTimeout(initializeGame, 25000);
+setTimeout(initializeGame, 20000);
 
 // Feed songs to audio engine 
 const musicBox = jukeBox();
-musicBox.addSongs(songList);
+musicBox.addNewSongs(songList);
 
  // // Add event listener to music button
  const elMusicToggle = document.querySelector('.toggle-music');
  elMusicToggle.addEventListener('click', musicBox.toggle);
 
 // Load intro music 
-musicBox.loadSong('intro')
+musicBox.loadSong('intro');
+// musicBox.fadeOut(5);
+
+
 
 
 
