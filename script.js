@@ -14,7 +14,7 @@ const introText = [
 ];
 
 const songList = {
-  "intro":"assets/music/a-bit-of-hope.mp3",
+  "intro":"assets/music/title-screen-2.mp3",
   "action-time":"assets/music/boss-time.mp3",
   "ending": "assets/music/8-bit-adventure-fesliyanstudios.mp3"
    };
@@ -27,6 +27,7 @@ function loadGameOpening() {
   // Fade-in blue garage background
   document.querySelector(".background").classList.add("fade-in");
   displayOpeningText();
+  
 }
 
 
@@ -38,7 +39,7 @@ function displayOpeningText() {
 function typeWriter(index){
   if(i < introText[index].length) {
     document.querySelector('.game-text').textContent += introText[index].charAt(i);
-    setTimeout(typeWriter, 150,index);
+    setTimeout(typeWriter, 100,index);
     i++;
   }else{
     index++;
@@ -134,13 +135,8 @@ function initializeGame() {
   // Start timer 
   CountDownTimer(25);
 
-  // fade out music 
-  musicBox.fadeOut(4);
+  musicBox.switchSongs("action-time")
 
-  // Start game music 
-  musicBox.loadSong("action-time");
-
- 
 
 }
 
@@ -417,10 +413,6 @@ function deactivateInterface() {
   document.querySelector(".player-hand").classList.add("graywash");
   document.querySelector(".computer-hand").classList.add("graywash");
 
-  // // Gray out buttons
-  // const buttons = document.querySelectorAll(".buttons");
-  // buttons.forEach((button) => button.classList.add("graywash"));
-
 }
 
 
@@ -444,6 +436,9 @@ function jukeBox(){
   const elAudio = document.createElement("audio");
   const soundBank = {};
   let nowPlaying = '';
+  elAudio.muted = true;
+  elAudio.volume = 1;
+  
   
   function toggle(){
     const elClassList = this.classList;
@@ -451,33 +446,29 @@ function jukeBox(){
     if(elClassList.contains('fa-volume-xmark')){
         elClassList.remove('fa-volume-xmark');
         elClassList.add('fa-volume-high');
-        // elAudio.play();
-        elAudio.volume = .5;
+        
+        elAudio.play(); //  play on click for first time due to autoplay policy
+        elAudio.muted = false;
 
       // Toggle music off
     } else {
       elClassList.remove('fa-volume-high');
       elClassList.add('fa-volume-xmark');
-      elAudio.volume = 0;
-      // pause();
+      elAudio.muted = true;
+      
     }
   }
 
-  function play(scene){
-    if(soundBank[scene]) {
-      elAudio.src = soundBank[scene];
-      elAudio.play();
-      nowPlaying = scene;
-    }else {
-      console.log("scene doesn't exist");
-
+  function play(){
+      
+      elAudio.play()
+      nowPlaying = elAudio.src
     }
     
-  }
-
-  function pause() {
+  function pause (){
     elAudio.pause();
   }
+
 
   function addNewSong(src, scene) {
     soundBank[scene] = src;
@@ -495,19 +486,16 @@ function jukeBox(){
   function loadSong(scene){
     elAudio.src = soundBank[scene];
     elAudio.setAttribute("preload", "auto");
-    elAudio.play();
-    elAudio.volume = 0;
+  
   }
 
-  function fadeOut(count) {
-    currentVol = elAudio.volume;
-    let volReduction =   -1 / count; 
-    volReduction = Number.parseFloat(volReduction).toFixed(2);
-    timerID = setInterval(reduceVolume, 1000);
+  function fadeOut(interval) {
 
-    function reduceVolume(volReduction){
-      if(elAudio.volume > 0){
-      elAudio.setVolume(elAudio.volume - volReduction);
+    timerID = setInterval(reduceVolume, interval);
+
+    function reduceVolume(){
+      if(elAudio.volume >= 0){
+      elAudio.volume -=0.10
       }else{
         // Kill timer once volume hits 0
         clearInterval(timerID);
@@ -516,7 +504,33 @@ function jukeBox(){
     
   }
 
-  return { toggle, play, addNewSong, addNewSongs, loadSong, fadeOut}
+  function fadeIn(interval) {
+    elAudio.volume = 0;
+    timerID = setInterval(increaseVolume, interval);
+    
+    function increaseVolume(){
+      if(elAudio.volume <= 1){
+      elAudio.volume +=0.02
+      }else{
+        // Kill timer once volume hits target
+        clearInterval(timerID);
+      }
+    }
+    
+  }
+
+  function switchSongs(scene) {
+    
+    loadSong(scene);
+    // Fade in new song
+    fadeIn(100);
+    elAudio.play()
+    
+    
+
+
+  }
+  return { toggle, play, addNewSong, addNewSongs, loadSong, fadeOut, fadeIn, switchSongs}
 
 }
 
@@ -525,7 +539,8 @@ function jukeBox(){
 
 // Load intro and transition
 window.onload = loadGameOpening;
-setTimeout(initializeGame, 20000);
+// Wait till text concludes then start game up
+setTimeout(initializeGame, 14000);
 
 // Feed songs to audio engine 
 const musicBox = jukeBox();
@@ -535,9 +550,10 @@ musicBox.addNewSongs(songList);
  const elMusicToggle = document.querySelector('.toggle-music');
  elMusicToggle.addEventListener('click', musicBox.toggle);
 
-// Load intro music 
-musicBox.loadSong('intro');
-// musicBox.fadeOut(5);
+// Play intro music 
+musicBox.switchSongs("intro");
+
+
 
 
 
