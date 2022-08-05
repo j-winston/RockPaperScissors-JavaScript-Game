@@ -1,3 +1,7 @@
+
+
+
+
 PROBLEM: Rock scissors paper is currently in text. IN order to make the game play more engaging, 
 we need a user interface.  For nostaligic appeal. we will borrow heavily from the 80's arcade hit, Double Dragon. 
 
@@ -48,22 +52,37 @@ TODO--2. add hand animation to screen for player and computer. outputs winner to
 
 TODO--3. display life point bar that removes life bar for each round lost. 
 todo--3a. Game ends once player loses last energy bar unit 
-
-
-
-
-TODO--4. display post round messages on screen 
 TODO--5. display introduction story line to screen 
-TODO--6. display victory messages
-TODO--7. Add different background for victory and defeat
+TODO--6. create loop so player can restart game after losing or winning 
+TODO--7. Add different background for victory and defeat--ELIMINATED
+TODO--7. Add countdown timer 
+
+
+
+
+
+
 TODO--8. Add music for intro, gameplay, win and defeat. 
+a. add intro music 
+b. Change music once action starts 
+
+TODO--8.a. Add title screen 
+8b. Drop in real double dragon tracks. for intro, game, and loss screen
+
+
+
 TODO--9. Last minute animations : slide in fists, drop down energy bars, moving arms up and down after pressing 'strike'
 TOD0--10. Add sound effects for ROCK {smash} PAPER{crumple} scissors {sword}
 
+TOO 11-- Add James Winston with some cool animated logo 
+TODO--12. Change those nasty buttons to something better
+TODY--13. Use a pixelated font 
 
+TODO 12--Change color of other player skin to lighter shade 
+TODO 13-- Shrink text and make sure it doens't leave box on screen resize
 ------
+TODO 14 --Add movement of arms on rock scissors paper
 
-1. IF user clicks on a button, that hand is saved as their hand. 
 
 
 
