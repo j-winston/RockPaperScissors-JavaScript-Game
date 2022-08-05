@@ -19,6 +19,12 @@ const songList = {
   "ending": "assets/music/8-bit-adventure-fesliyanstudios.mp3"
    };
 
+const backgrounds = {
+  "title":"/assets/images/title-screen.png",
+  "intro": "/assets/images/double-dragon-intro.png",
+  "game": "/assets/images/double-dragon-garage.png"
+};
+
 
 function loadTitleScreen(){
   const elBackground = document.querySelector(".background");
@@ -26,35 +32,40 @@ function loadTitleScreen(){
   elBackground.style.backgroundSize = 'contain';
   elBackground.style.backgroundRepeat = 'no-repeat';
 
-
-  
 }
 
 
-function loadIntroScreen() {
+function loadIntro() {
+  changeBackground('intro');
   // Fade-in blue garage background
   document.querySelector(".background").classList.add("fade-in");
+  displayOpeningText();
+
+  function displayOpeningText() {
+    typeWriter(0);
+  
+    function typeWriter(index){
+      if(i < introText[index].length) {
+        document.querySelector('.game-text').textContent += introText[index].charAt(i);
+        setTimeout(typeWriter, 100,index);
+        i++;
+      }else{
+        index++;
+        i=0;
+        // Reset text on screen
+        document.querySelector('.game-text').textContent = "";
+        setTimeout(typeWriter, 10, index);
+      }
+    }
+    }
   
 }
 
 
-function displayOpeningText() {
-  typeWriter(0);
-
-  function typeWriter(index){
-    if(i < introText[index].length) {
-      document.querySelector('.game-text').textContent += introText[index].charAt(i);
-      setTimeout(typeWriter, 100,index);
-      i++;
-    }else{
-      index++;
-      i=0;
-      // Reset text on screen
-      document.querySelector('.game-text').textContent = "";
-      setTimeout(typeWriter, 10, index);
-    }
-  }
-  }
+function changeBackground(stage){
+  const elBackground = document.querySelector(".background");
+  elBackground.style.backgroundImage = `url("${backgrounds[stage]}")`;
+}
 
 
 
@@ -392,8 +403,6 @@ function gameOverScreen(){
 
 }
 
-
-
 function clearScreen(){
   const mesgNodes = document.querySelector('.message-container').childNodes;
   mesgNodes.forEach((node)=>node.textContent="");
@@ -548,11 +557,17 @@ function jukeBox(){
 
 window.onload = loadTitleScreen;
 
-// // Intro text screen
-// displayOpeningText();
+// Show intro screen on 'Enter'
+elKeyDown = document.addEventListener('keydown', (e)=> {
+  if(e.key === "Enter"){
 
-// // Wait till text concludes then start game up
-// setTimeout(initializeGame, 14000);
+    loadIntro();
+  }
+  });
+
+
+// Wait till text concludes then start game up
+setTimeout(initializeGame, 14000);
 
 // Feed songs to audio engine 
 const musicBox = jukeBox();

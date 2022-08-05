@@ -245,6 +245,7 @@ img {
     text-align: center;
 }
 
+/* Game Credit and Copyright */
 
 .credit-text {
     color:rgb(255, 255, 255);
@@ -253,6 +254,9 @@ img {
     font-size: 2em;
 }
 
+.copyright-section {
+    margin-top: 5vh;
+}
 
  /* Energy Bars */
 
