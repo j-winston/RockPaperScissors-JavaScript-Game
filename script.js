@@ -25,7 +25,9 @@ function loadTitleScreen(){
   elBackground.style.backgroundImage = "url('./assets/images/title-screen.png')";
   elBackground.style.backgroundSize = 'contain';
   elBackground.style.backgroundRepeat = 'no-repeat';
-  // loadIntroScreen();
+
+
+  
 }
 
 
@@ -72,7 +74,7 @@ function initializeGame() {
   // Add 1 player credit
   document.querySelector('.credit-text').textContent = "0 CREDIT"
 
-  // //Clear screen of all messages
+  // Clear screen of all messages
   const userMessages = document.querySelector('.game-text');
   const userSubtext = document.querySelector('.game-subtext');
   clearScreen();
@@ -516,7 +518,7 @@ function jukeBox(){
     timerID = setInterval(increaseVolume, interval);
     
     function increaseVolume(){
-      if(elAudio.volume <= 1){
+      if(elAudio.volume <= .95){
       elAudio.volume +=0.02
       }else{
         // Kill timer once volume hits target
