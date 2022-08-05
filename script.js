@@ -20,35 +20,42 @@ const songList = {
    };
 
 
-//TODO-1. Remove 'time' from intro screen
-// TODO-2. Add 'You've been hurt. Don't give up! 
+function loadTitleScreen(){
+  const elBackground = document.querySelector(".background");
+  elBackground.style.backgroundImage = "url('./assets/images/title-screen.png')";
+  elBackground.style.backgroundSize = 'contain';
+  elBackground.style.backgroundRepeat = 'no-repeat';
+  // loadIntroScreen();
+}
 
-function loadGameOpening() {
+
+function loadIntroScreen() {
   // Fade-in blue garage background
   document.querySelector(".background").classList.add("fade-in");
-  displayOpeningText();
   
 }
 
 
 function displayOpeningText() {
   typeWriter(0);
+
+  function typeWriter(index){
+    if(i < introText[index].length) {
+      document.querySelector('.game-text').textContent += introText[index].charAt(i);
+      setTimeout(typeWriter, 100,index);
+      i++;
+    }else{
+      index++;
+      i=0;
+      // Reset text on screen
+      document.querySelector('.game-text').textContent = "";
+      setTimeout(typeWriter, 10, index);
+    }
+  }
   }
 
 
-function typeWriter(index){
-  if(i < introText[index].length) {
-    document.querySelector('.game-text').textContent += introText[index].charAt(i);
-    setTimeout(typeWriter, 100,index);
-    i++;
-  }else{
-    index++;
-    i=0;
-    // Reset text on screen
-    document.querySelector('.game-text').textContent = "";
-    setTimeout(typeWriter, 10, index);
-  }
-}
+
 
 
 function initializeGame() {
@@ -537,10 +544,13 @@ function jukeBox(){
 
 // MAIN
 
-// Load intro and transition
-window.onload = loadGameOpening;
-// Wait till text concludes then start game up
-setTimeout(initializeGame, 14000);
+window.onload = loadTitleScreen;
+
+// // Intro text screen
+// displayOpeningText();
+
+// // Wait till text concludes then start game up
+// setTimeout(initializeGame, 14000);
 
 // Feed songs to audio engine 
 const musicBox = jukeBox();
