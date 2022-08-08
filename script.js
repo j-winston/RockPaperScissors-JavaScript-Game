@@ -1,6 +1,8 @@
 
 // Globals 
 let stillPlaying = true;
+let TIME_LIMIT = 35;
+
 // Used to kill timer later on
 let gameTimer; 
 
@@ -14,12 +16,20 @@ const introText = [
 ];
 
 const songList = {
-  "intro":"assets/music/title-screen-2.mp3",
+  "title-screen":"assets/music/title-screen-2.mp3",
   "action-time":"assets/music/boss-time.mp3",
   "ending": "assets/music/8-bit-adventure-fesliyanstudios.mp3",
   "press-enter": "assets/sfx/press-enter-2.mp3",
   "soundtrack": "assets/music/soundtrack.mp3"
    };
+
+const audioRange = {
+  "title-screen": [1, 95],
+  "intro-screen": [96, 179],
+  "sad-end": [112,170],
+  "action-screen": [340, 428]
+  
+};
 
 const backgrounds = {
   "title":"/assets/images/title-screen.png",
@@ -34,14 +44,16 @@ function loadTitleScreen(){
   elBackground.style.backgroundSize = 'contain';
   elBackground.style.backgroundRepeat = 'no-repeat';
 
+  // Play title music 
+  musicBox.playRange(audioRange['title-screen']);
+
 }
 
 
 function loadIntro() {
-    musicBox.loadSong('soundtrack');
-    musicBox.playTime = 23;
-    musicBox.play();
-    
+  // Play intro music 
+  musicBox.loadSong('soundtrack');
+  musicBox.playRange(audioRange['intro-screen']);
   changeBackground('intro');
  
   // Fade-in blue garage background
@@ -67,8 +79,9 @@ function loadIntro() {
       }
     }
     }
-    musicBox.loadSong('intro');
-    musicBox.play('intro');
+
+    // Wait till text concludes then start game up
+    setTimeout(initializeGame, 14000);
   
     
 }
@@ -165,9 +178,10 @@ function initializeGame() {
   strikeButton.addEventListener("click", playRound);
 
   // Start timer 
-  CountDownTimer(25);
+  CountDownTimer(TIME_LIMIT);
 
-  musicBox.switchSongs("action-time")
+  // Start stage music 
+  musicBox.playRange(audioRange['action-screen']);
 
 
 }
@@ -378,6 +392,9 @@ function displayWinner(winningPlayer) {
   }else if(winningPlayer == "timeOut") {
     message.textContent = "Time's up!";
   }
+
+  // Play loss music 
+  musicBox.playRange(audioRange['sad-end']);
   
   // Give option to continue
   playAgain();
@@ -410,6 +427,7 @@ function gameOverScreen(){
 
   document.querySelector('.credit-text').textContent = "INSERT COIN";
   document.querySelector('.game-over').textContent = "GAME OVER";
+
 
 
 
@@ -466,9 +484,12 @@ function jukeBox(){
   const elAudio = document.createElement("audio");
   elAudio.setAttribute("preload", "auto");
   const soundBank = {};
+  // Keeps track of song range timers
+  let currentPlayTimer = "";
   let nowPlaying = '';
   elAudio.muted = true;
   elAudio.volume = 1;
+  
   
   
   function toggle(){
@@ -535,6 +556,7 @@ function jukeBox(){
     
   }
 
+
   function fadeIn(interval) {
     elAudio.volume = 0;
     timerID = setInterval(increaseVolume, interval);
@@ -551,17 +573,30 @@ function jukeBox(){
   }
 
   function switchSongs(scene) {
-    
+    // If there's a play timer, stop it 
+    clearTimeout(currentPlayTimer);
+
     loadSong(scene);
     // Fade in new song
     fadeIn(100);
     elAudio.play()
     
+  }
+
+  function playRange(range) {
     
 
+    start = range[0];
+    end = range[1];
+
+    end *= 1000;
+    elAudio.currentTime = start; 
+    // kill music at endpoint if need be 
+    let currentPlayTimer = setTimeout(pause, end); //defome
+    elAudio.play();
 
   }
-  return { toggle, play, addNewSong, addNewSongs, loadSong, fadeOut, fadeIn, switchSongs}
+  return { toggle, play, addNewSong, addNewSongs, loadSong, fadeOut, fadeIn, switchSongs, playRange}
 
 }
 
@@ -571,8 +606,8 @@ function startOnEnter(e) {
     musicBox.loadSong('press-enter');
     musicBox.play('press-enter');
     document.removeEventListener('keydown',startOnEnter);
-    // allow time to play sound
-    setTimeout(loadIntro, 600);
+    // delay time to play sound
+    setTimeout(loadIntro, 850);
     
 
   }
@@ -588,23 +623,20 @@ window.onload = loadTitleScreen;
 // Load intro screen on 'Enter' 
 document.addEventListener('keydown', startOnEnter);
 
-
-
-
-// // Wait till text concludes then start game up
-// setTimeout(initializeGame, 14000);
-
-// Feed songs to audio engine 
+// Start audio engine 
 const musicBox = jukeBox();
-
 musicBox.addNewSongs(songList);
+musicBox.loadSong("soundtrack");
 
- // // Add event listener to music button
+
+
+
+
+ // Add event listener to music button
  const elMusicToggle = document.querySelector('.toggle-music');
  elMusicToggle.addEventListener('click', musicBox.toggle);
 
-// Play intro music 
-musicBox.switchSongs("intro");
+
 
 
 

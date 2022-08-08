@@ -87,7 +87,8 @@ TODO 13-- Shrink text and make sure it doens't leave box on screen resize
 TODO 14 --Add movement of arms on rock scissors paper
 
 
-
+todo -- separate sfx functionality from music 
+defne currentPLayTimer elsewhere so it can get killed 
 
 
 
