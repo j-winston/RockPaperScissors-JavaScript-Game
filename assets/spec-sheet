@@ -70,7 +70,7 @@ TODO--8.a. Add title screen
 8b. Drop in real double dragon tracks. 
 
 
-for intro, game, and loss screen, add credits to bottom in css
+for intro, game, and loss screen, add credits to bottom in hange credcss
 
 
 
@@ -89,6 +89,7 @@ TODO 14 --Add movement of arms on rock scissors paper
 
 todo -- separate sfx functionality from music 
 defne currentPLayTimer elsewhere so it can get killed 
+change credit sound 
 
 
 

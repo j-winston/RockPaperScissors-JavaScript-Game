@@ -38,6 +38,8 @@ const backgrounds = {
 };
 
 
+
+
 function loadTitleScreen(){
   const elBackground = document.querySelector(".background");
   elBackground.style.backgroundImage = "url('./assets/images/title-screen.png')";
@@ -46,6 +48,8 @@ function loadTitleScreen(){
 
   // Play title music 
   musicBox.playRange(audioRange['title-screen']);
+
+
 
 }
 
@@ -173,9 +177,11 @@ function initializeGame() {
 
   // Set up rock paper scissors buttons
   buttons.forEach((button) => button.addEventListener("click", showActiveButton));
+  buttons.forEach((button) => button.addEventListener("click", effectsBox.playSelect));
 
-  // Set up 'strike' button to play a round each click
+  // Set up 'strike' button
   strikeButton.addEventListener("click", playRound);
+  strikeButton.addEventListener("mousedown", effectsBox.playThud);
 
   // Start timer 
   CountDownTimer(TIME_LIMIT);
@@ -490,8 +496,6 @@ function jukeBox(){
   elAudio.muted = true;
   elAudio.volume = 1;
   
-  
-  
   function toggle(){
     const elClassList = this.classList;
     // Toggle music on
@@ -596,15 +600,19 @@ function jukeBox(){
     elAudio.play();
 
   }
-  return { toggle, play, addNewSong, addNewSongs, loadSong, fadeOut, fadeIn, switchSongs, playRange}
+
+  function whatsPlaying(){
+    alert(this.nowPlaying);
+  }
+
+  return { toggle, play, addNewSong, addNewSongs, loadSong, fadeOut, fadeIn, switchSongs, playRange, whatsPlaying}
 
 }
 
 function startOnEnter(e) {
  
   if(e.key === "Enter"){
-    musicBox.loadSong('press-enter');
-    musicBox.play('press-enter');
+    effectsBox.playSelect();
     document.removeEventListener('keydown',startOnEnter);
     // delay time to play sound
     setTimeout(loadIntro, 850);
@@ -614,23 +622,49 @@ function startOnEnter(e) {
 }
 
 
+function sfxBox(){
+  const elSfx = document.createElement("audio");
+  elSfx.setAttribute("preload", "auto");
+
+
+  function playThud() {
+    elSfx.src = `assets/sfx/heavy-thud.mp3`;
+    elSfx.currentTime = .25;
+    elSfx.play();
+  }
+
+  function playSelect() {
+    elSfx.src = `assets/sfx/credit.mp3`;
+    elSfx.play();
+    setTimeout(stop, 1100);
+
+  function stop() {
+    elSfx.pause();
+  }
+
+
+  }
+
+
+  return {playThud, playSelect}
+}
+
 
 // MAIN
+
+// Start audio engine 
+const musicBox = jukeBox();
+musicBox.addNewSongs(songList);
+musicBox.loadSong("soundtrack");
+ 
+// Sound effect object
+const effectsBox = sfxBox();
 
 // Load title screen
 window.onload = loadTitleScreen;
 
 // Load intro screen on 'Enter' 
 document.addEventListener('keydown', startOnEnter);
-
-// Start audio engine 
-const musicBox = jukeBox();
-musicBox.addNewSongs(songList);
-musicBox.loadSong("soundtrack");
-
-
-
-
 
  // Add event listener to music button
  const elMusicToggle = document.querySelector('.toggle-music');
