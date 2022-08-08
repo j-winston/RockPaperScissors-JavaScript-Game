@@ -16,7 +16,9 @@ const introText = [
 const songList = {
   "intro":"assets/music/title-screen-2.mp3",
   "action-time":"assets/music/boss-time.mp3",
-  "ending": "assets/music/8-bit-adventure-fesliyanstudios.mp3"
+  "ending": "assets/music/8-bit-adventure-fesliyanstudios.mp3",
+  "press-enter": "assets/sfx/press-enter-2.mp3",
+  "soundtrack": "assets/music/soundtrack.mp3"
    };
 
 const backgrounds = {
@@ -36,13 +38,20 @@ function loadTitleScreen(){
 
 
 function loadIntro() {
+    musicBox.loadSong('soundtrack');
+    musicBox.playTime = 23;
+    musicBox.play();
+    
   changeBackground('intro');
+ 
   // Fade-in blue garage background
   document.querySelector(".background").classList.add("fade-in");
   displayOpeningText();
+  
 
   function displayOpeningText() {
     typeWriter(0);
+    
   
     function typeWriter(index){
       if(i < introText[index].length) {
@@ -58,7 +67,10 @@ function loadIntro() {
       }
     }
     }
+    musicBox.loadSong('intro');
+    musicBox.play('intro');
   
+    
 }
 
 
@@ -452,6 +464,7 @@ function killTimer(timer){
 function jukeBox(){
 
   const elAudio = document.createElement("audio");
+  elAudio.setAttribute("preload", "auto");
   const soundBank = {};
   let nowPlaying = '';
   elAudio.muted = true;
@@ -491,7 +504,7 @@ function jukeBox(){
   function addNewSong(src, scene) {
     soundBank[scene] = src;
     elAudio.src = src;
-    elAudio.setAttribute("preload", "auto");
+   
   }
   
   function addNewSongs(songList) {
@@ -503,7 +516,7 @@ function jukeBox(){
 
   function loadSong(scene){
     elAudio.src = soundBank[scene];
-    elAudio.setAttribute("preload", "auto");
+  
   
   }
 
@@ -552,25 +565,38 @@ function jukeBox(){
 
 }
 
+function startOnEnter(e) {
+ 
+  if(e.key === "Enter"){
+    musicBox.loadSong('press-enter');
+    musicBox.play('press-enter');
+    document.removeEventListener('keydown',startOnEnter);
+    // allow time to play sound
+    setTimeout(loadIntro, 600);
+    
+
+  }
+}
+
+
 
 // MAIN
 
+// Load title screen
 window.onload = loadTitleScreen;
 
-// Show intro screen on 'Enter'
-elKeyDown = document.addEventListener('keydown', (e)=> {
-  if(e.key === "Enter"){
-
-    loadIntro();
-  }
-  });
+// Load intro screen on 'Enter' 
+document.addEventListener('keydown', startOnEnter);
 
 
-// Wait till text concludes then start game up
-setTimeout(initializeGame, 14000);
+
+
+// // Wait till text concludes then start game up
+// setTimeout(initializeGame, 14000);
 
 // Feed songs to audio engine 
 const musicBox = jukeBox();
+
 musicBox.addNewSongs(songList);
 
  // // Add event listener to music button
