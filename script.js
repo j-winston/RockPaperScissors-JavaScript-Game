@@ -2,13 +2,15 @@
 // Globals 
 let stillPlaying = true;
 let TIME_LIMIT = 35;
+let NUMBER_CREDITS = 0;
+
 
 // Used to kill timer later on
 let gameTimer; 
 
 // Used to track index of intro screen text
 let i = 0;
-const introText = [
+let introText = [
   "NYC: Sept 24, 2041..",
   "Willy and his thugs have captured Marianne..",
   "You'll have to fight him with your hands to save her...",
@@ -20,15 +22,15 @@ const songList = {
   "action-time":"assets/music/boss-time.mp3",
   "ending": "assets/music/8-bit-adventure-fesliyanstudios.mp3",
   "press-enter": "assets/sfx/press-enter-2.mp3",
-  "soundtrack": "assets/music/soundtrack.mp3"
+  "soundtrack": "assets/music/soundtrack.mp3",
    };
 
 const audioRange = {
   "title-screen": [1, 95],
   "intro-screen": [96, 179],
-  "sad-end": [112,170],
-  "action-screen": [340, 428]
-  
+  "sad-end": [112,175],
+  "action-screen": [340, 428],
+  "victory-screen": [333, 336]
 };
 
 const backgrounds = {
@@ -59,22 +61,38 @@ function loadIntro() {
   musicBox.loadSong('soundtrack');
   musicBox.playRange(audioRange['intro-screen']);
   changeBackground('intro');
+
+  // Set up enter key and give option to skip text
+  document.addEventListener('keydown', skipIntro);
+  document.querySelector('.credit-text').classList.remove('fade-out');
+  document.querySelector('.credit-text').textContent = "PRESS ENTER TO SKIP";
+
+  function skipIntro(e){
+    if(e.key === 'Enter'){
+      // Short circuit the typewriter function iterator 
+      introText = "";
+      initializeGame();
+    }
+  
+  }
  
   // Fade-in blue garage background
   document.querySelector(".background").classList.add("fade-in");
+
   displayOpeningText();
-  
+
 
   function displayOpeningText() {
+
     typeWriter(0);
     
-  
     function typeWriter(index){
       if(i < introText[index].length) {
         document.querySelector('.game-text').textContent += introText[index].charAt(i);
         setTimeout(typeWriter, 100,index);
         i++;
       }else{
+        // Switch to next sentence in text array
         index++;
         i=0;
         // Reset text on screen
@@ -86,9 +104,11 @@ function loadIntro() {
 
     // Wait till text concludes then start game up
     setTimeout(initializeGame, 14000);
-  
     
 }
+
+
+
 
 
 function changeBackground(stage){
@@ -111,17 +131,15 @@ function initializeGame() {
   changeComputerHand('rock');
   changePlayerHand('rock');
 
-  // Add 1 player credit
-  document.querySelector('.credit-text').textContent = "0 CREDIT"
-
   // Clear screen of all messages
   const userMessages = document.querySelector('.game-text');
   const userSubtext = document.querySelector('.game-subtext');
   clearScreen();
 
-  // Display kickstart message
+  // Display kickstart message and play voice
   userMessages.classList.add('restart-game');
-  userMessages.textContent = "LET'S DO IT!";
+  userMessages.textContent = "BRING IT ON!";
+  effectsBox.playBringIt();
   
   // Get rid of kickstart message after a few sec
   setTimeout(()=> { 
@@ -148,8 +166,8 @@ function initializeGame() {
   document.querySelector(".background").classList.remove('dither-background');
 
   // Hands
-  document.querySelector(".player-hand").classList.remove("graywash");
-  document.querySelector(".computer-hand").classList.remove("graywash");
+  document.querySelector(".player-hand").classList.remove("fade-out");
+  document.querySelector(".computer-hand").classList.remove("fade-out");
 
   // Rock scissors paper buttons
   const buttons = document.querySelectorAll(".buttons");
@@ -185,6 +203,11 @@ function initializeGame() {
 
   // Start timer 
   CountDownTimer(TIME_LIMIT);
+
+  // If there are no credits, add one 
+  if(NUMBER_CREDITS === 0) {
+    NUMBER_CREDITS += 1;
+  }
 
   // Start stage music 
   musicBox.playRange(audioRange['action-screen']);
@@ -383,24 +406,33 @@ function displayWinner(winningPlayer) {
   const message = document.querySelector(".ending-text");
   const messageSubtext = document.querySelector(".game-subtext");
   
-
-  // Gray out background and disable buttons
-  deactivateInterface();
-  killTimer(gameTimer);
-
-  // message.classList.add('ending-text');
   // Display victory or defeat message
   if (winningPlayer == "computer") {
     message.textContent = "You're hurt, but don't give up! Think about Marianne";
+    // Play loss music 
+    musicBox.playRange(audioRange['sad-end']);
   } else if (winningPlayer == "player") {
+    // Play victory
+    musicBox.playRange(audioRange['victory-screen']);
     message.textContent = "Well done! With one last crushing blow, you defeat Willy." + 
     "Hours later, you find Marianne, shaken but unhurt.";
   }else if(winningPlayer == "timeOut") {
     message.textContent = "Time's up!";
+    // Play loss music 
+    musicBox.playRange(audioRange['sad-end']);
   }
 
-  // Play loss music 
-  musicBox.playRange(audioRange['sad-end']);
+  // Deduct credit 
+  NUMBER_CREDITS -= 1;
+
+   // Gray out background and disable buttons
+   deactivateInterface();
+   killTimer(gameTimer);
+
+
+  
+
+
   
   // Give option to continue
   playAgain();
@@ -442,6 +474,8 @@ function gameOverScreen(){
 function clearScreen(){
   const mesgNodes = document.querySelector('.message-container').childNodes;
   mesgNodes.forEach((node)=>node.textContent="");
+  
+  document.querySelector('.credit-text').classList.add('fade-out');
 }
 
 
@@ -456,16 +490,20 @@ function deactivateInterface() {
   const lifeBar = document.querySelector(".player-life-bar");
   const cpuLifeBar = document.querySelector(".cpu-life-bar");
 
-  lifeBar.classList.add('graywash');
-  cpuLifeBar.classList.add('graywash');
+  lifeBar.classList.add('fade-out');
+  cpuLifeBar.classList.add('fade-out');
 
   // Gray out background
   const background = document.querySelector(".background");
   background.classList.add("dither-background");
 
   // Gray out user hands
-  document.querySelector(".player-hand").classList.add("graywash");
-  document.querySelector(".computer-hand").classList.add("graywash");
+  document.querySelector(".player-hand").classList.add("fade-out");
+  document.querySelector(".computer-hand").classList.add("fade-out");
+
+    // Update credits
+  document.querySelector(".credit-display").textContent = `${NUMBER_CREDITS} CREDITS`;
+
 
 }
 
@@ -592,12 +630,13 @@ function jukeBox(){
 
     start = range[0];
     end = range[1];
-
-    end *= 1000;
+    // Determines how long to let track play
+    const len = end - start;
     elAudio.currentTime = start; 
     // kill music at endpoint if need be 
-    let currentPlayTimer = setTimeout(pause, end); //defome
+    let currentPlayTimer = setTimeout(pause, len*1000); 
     elAudio.play();
+    
 
   }
 
@@ -612,8 +651,18 @@ function jukeBox(){
 function startOnEnter(e) {
  
   if(e.key === "Enter"){
+    // Play coin chime 
     effectsBox.playSelect();
+
+    NUMBER_CREDITS += 1;
+
+    // Hide 'insert coin'
+    document.querySelector('.credit-text').classList.add('fade-out');
     document.removeEventListener('keydown',startOnEnter);
+
+    // Display credits
+    document.querySelector('.credit-display').textContent = `${NUMBER_CREDITS} CREDIT`;
+
     // delay time to play sound
     setTimeout(loadIntro, 850);
     
@@ -637,16 +686,21 @@ function sfxBox(){
     elSfx.src = `assets/sfx/credit.mp3`;
     elSfx.play();
     setTimeout(stop, 1100);
+  }
+
+  function playBringIt() {
+    elSfx.src = `assets/sfx/bring-it-on.mp3`;
+    elSfx.play();
+  }
 
   function stop() {
     elSfx.pause();
   }
 
 
-  }
 
 
-  return {playThud, playSelect}
+  return {playThud, playSelect, playBringIt}
 }
 
 

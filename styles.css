@@ -181,9 +181,9 @@ img {
     display:flex;
     align-items: center;
     flex-direction: column;
-    max-width: 75%;
+    max-width: 50vw;
+    max-height: 40vh;
     gap: 20px;
-    line-height: 90px;
     font-family: "dePixel";
 }
 
@@ -195,7 +195,7 @@ img {
 
 .game-text {
     color:rgb(255, 255, 255);
-        font-size: 2em;
+        font-size: 30px;
         text-align: center;
         margin:0px;
         
@@ -206,9 +206,9 @@ img {
 .game-subtext
  {
     color:rgb(255, 255, 255);
-    font-size: 1em;
+    font-size: 1.5em;
     text-align: center;
-    margin:0px;
+    margin-top:10%;
 }
 
 .ending-text {
@@ -228,7 +228,7 @@ img {
 
 
 .game-over {
-    color:rgb(255, 255, 255);
+    color:rgb(224, 27, 27);
     font-family:"dePixel";
     font-weight: 900;
     font-size: 5rem;
@@ -248,6 +248,13 @@ img {
 /* Game Credit and Copyright */
 
 .credit-text {
+    color:rgb(255, 255, 255);
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 4em;
+}
+
+.credit-display {
     color:rgb(255, 255, 255);
     text-transform: uppercase;
     font-weight: 900;
