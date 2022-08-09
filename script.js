@@ -140,8 +140,14 @@ function initializeGame() {
   userMessages.classList.add('restart-game');
   userMessages.textContent = "BRING IT ON!";
   effectsBox.playBringIt();
-  
-  // Get rid of kickstart message after a few sec
+
+  // If there are no credits, add one 
+  if(NUMBER_CREDITS === 0) {
+    NUMBER_CREDITS += 1;
+  }
+  document.querySelector('.credit-display').textContent = `${NUMBER_CREDITS} credit`;
+
+  // Get rid of kickstagitrt message after a few sec
   setTimeout(()=> { 
     userMessages.textContent = "";userMessages.classList.remove('restart-game')}, 3000);
 
@@ -204,10 +210,7 @@ function initializeGame() {
   // Start timer 
   CountDownTimer(TIME_LIMIT);
 
-  // If there are no credits, add one 
-  if(NUMBER_CREDITS === 0) {
-    NUMBER_CREDITS += 1;
-  }
+
 
   // Start stage music 
   musicBox.playRange(audioRange['action-screen']);
@@ -474,7 +477,7 @@ function gameOverScreen(){
 function clearScreen(){
   const mesgNodes = document.querySelector('.message-container').childNodes;
   mesgNodes.forEach((node)=>node.textContent="");
-  
+
   document.querySelector('.credit-text').classList.add('fade-out');
 }
 
