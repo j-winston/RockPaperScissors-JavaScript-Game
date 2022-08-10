@@ -78,6 +78,8 @@ function loadIntro() {
     if(e.key === 'Enter'){
       introText = "";
       clearTimeout(delayTimer);
+      // Kill event listener
+      document.removeEventListener('keydown', skipIntro);
       initializeGame();
     }
   
@@ -123,7 +125,7 @@ function initializeGame() {
   // Reset game loop 
   stillPlaying = true;
 
-  // Kill timer just in case
+  // Kill main game timer  
   killTimer(gameTimer);
 
   // Reset both hands to rock 
@@ -146,11 +148,11 @@ function initializeGame() {
   }
   document.querySelector('.credit-display').textContent = `${NUMBER_CREDITS} credit`;
 
-  // Get rid of kickstagitrt message after a few sec
+  // Get rid of kickstart message after a few sec
   setTimeout(()=> { 
     userMessages.textContent = "";userMessages.classList.remove('restart-game')}, 3000);
 
-  // Enable all buttons 
+  // Enable gameplay buttons 
   const btns = document.querySelectorAll(".buttons");
   const strikeButton = document.querySelector(".strike-button");
   btns.forEach((button) => (button.disabled = false));
@@ -161,8 +163,8 @@ function initializeGame() {
   // Energy bar
   const lifeBar = document.querySelector(".player-life-bar");
   const cpuLifeBar = document.querySelector(".cpu-life-bar");
-  lifeBar.classList.remove('graywash');
-  cpuLifeBar.classList.remove('graywash');
+  lifeBar.classList.remove('fade-out');
+  cpuLifeBar.classList.remove('fade-out');
   
   //Buttons
   btns.forEach((button) => button.classList.remove("graywash"));
