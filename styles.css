@@ -206,14 +206,14 @@ img {
 .game-subtext
  {
     color:rgb(255, 255, 255);
-    font-size: 1.5em;
+    font-size: 3vw;
     text-align: center;
     margin-top:10%;
 }
 
 .ending-text {
     color:rgb(247, 255, 94);
-    font-size: 2em;
+    font-size: 3vw;
     
     text-align: center;
     margin:0px;
@@ -240,7 +240,7 @@ img {
 .restart-game {
     color:rgb(255, 252, 68);
     font-weight: 900;
-    font-size: 4em;
+    font-size: 5vw;
     transition: 3s;
     text-align: center;
 }
