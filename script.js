@@ -18,9 +18,9 @@ let introText = [
 ];
 
 const songList = {
-  "title-screen":"assets/music/title-screen-2.mp3",
-  "action-time":"assets/music/boss-time.mp3",
-  "ending": "assets/music/8-bit-adventure-fesliyanstudios.mp3",
+  // "title-screen":"assets/music/title-screen-2.mp3",
+  // "action-time":"assets/music/boss-time.mp3",
+  // "ending": "assets/music/8-bit-adventure-fesliyanstudios.mp3",
   "press-enter": "assets/sfx/press-enter-2.mp3",
   "soundtrack": "assets/music/soundtrack.mp3",
    };
@@ -660,7 +660,7 @@ function jukeBox(){
 
 function startOnEnter(e) {
  
-  if(e.key === "Enter"){
+  if(e.key === "Enter") {
     // Play coin chime 
     effectsBox.playSelect();
 
@@ -679,6 +679,25 @@ function startOnEnter(e) {
 
   }
 }
+
+function startOnTouch() {
+  // Play coin chime 
+  effectsBox.playSelect();
+
+  NUMBER_CREDITS += 1;
+
+  // Hide 'insert coin'
+  document.querySelector('.credit-text').classList.add('fade-out');
+  document.removeEventListener('keydown',startOnEnter);
+
+  // Display credits
+  document.querySelector('.credit-display').textContent = `${NUMBER_CREDITS} CREDIT`;
+
+  // delay time to play sound
+  setTimeout(loadIntro, 850);
+
+  }
+
 
 
 function sfxBox(){
@@ -734,8 +753,12 @@ const effectsBox = sfxBox();
 // Load title screen
 window.onload = loadTitleScreen;
 
-// Load intro screen on 'Enter' 
+// Event listener for Enter
 document.addEventListener('keydown', startOnEnter);
+// Event listener for touch screen
+document.addEventListener('touchstart', startOnTouch);
+
+
 
  // Add event listener to music button
  const elMusicToggle = document.querySelector('.toggle-music');
