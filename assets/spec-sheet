@@ -68,10 +68,8 @@ TODO--2. add hand animation to screen for player and computer. outputs winner to
 __CURRENT____
 
 
-TODO(bug)--mute sound fx on mute 
-
-
-
+TODO(bug): fix energy bar position
+TODO(bug): properly disable 'enter key'
 
 
 
