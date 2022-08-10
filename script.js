@@ -68,7 +68,7 @@ function loadIntro() {
   document.querySelector('.credit-text').textContent = "PRESS ENTER TO SKIP";
   
   // Set up for touch screens
-  document.addEventListener('touch', skipIntroTouch);
+  document.addEventListener('touchend', skipIntroTouch);
 
   // Set delay timer while text writes to screen
   const delayTimer = setTimeout(initializeGame, 14000);
@@ -92,7 +92,7 @@ function loadIntro() {
       introText = "";
       clearTimeout(delayTimer);
       // Kill event listener
-      document.removeEventListener('touch', skipIntroTouch);
+      document.removeEventListener('touchend', skipIntroTouch);
       initializeGame();
   }
 
@@ -699,7 +699,7 @@ function startOnTouch() {
 
   // Hide 'insert coin'
   document.querySelector('.credit-text').classList.add('fade-out');
-  document.removeEventListener('touch', startOnTouch);
+  document.removeEventListener('touchend', startOnTouch);
 
   // Display credits
   document.querySelector('.credit-display').textContent = `${NUMBER_CREDITS} CREDIT`;
@@ -767,7 +767,7 @@ window.onload = loadTitleScreen;
 // Event listener for Enter
 document.addEventListener('keydown', startOnEnter);
 // Event listener for touch screen
-document.addEventListener('touchstart', startOnTouch);
+document.addEventListener('touchend', startOnTouch);
 
 
  // Add event listener to music button
