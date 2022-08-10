@@ -66,26 +66,28 @@ function loadIntro() {
   document.addEventListener('keydown', skipIntro);
   document.querySelector('.credit-text').classList.remove('fade-out');
   document.querySelector('.credit-text').textContent = "PRESS ENTER TO SKIP";
+  
+  // Set delay timer while text writes to screen
+  const delayTimer = setTimeout(initializeGame, 14000);
 
+    // Fade-in blue garage background
+    document.querySelector(".background").classList.add("fade-in");
+
+  // Skip text story if user desires 
   function skipIntro(e){
     if(e.key === 'Enter'){
-      // Short circuit the typewriter function iterator 
       introText = "";
+      clearTimeout(delayTimer);
       initializeGame();
     }
   
   }
- 
-  // Fade-in blue garage background
-  document.querySelector(".background").classList.add("fade-in");
 
+  // Start typewriter story 
   displayOpeningText();
-
-
   function displayOpeningText() {
 
     typeWriter(0);
-    
     function typeWriter(index){
       if(i < introText[index].length) {
         document.querySelector('.game-text').textContent += introText[index].charAt(i);
@@ -101,9 +103,6 @@ function loadIntro() {
       }
     }
     }
-
-    // Wait till text concludes then start game up
-    setTimeout(initializeGame, 14000);
     
 }
 
