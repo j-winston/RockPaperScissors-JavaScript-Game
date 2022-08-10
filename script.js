@@ -767,7 +767,7 @@ window.onload = loadTitleScreen;
 // Event listener for Enter
 document.addEventListener('keydown', startOnEnter);
 // Event listener for touch screen
-document.addEventListener('touch', startOnTouch);
+document.addEventListener('touchstart', startOnTouch);
 
 
  // Add event listener to music button
