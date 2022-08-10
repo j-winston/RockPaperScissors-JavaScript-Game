@@ -65,6 +65,9 @@ TODO--1. play a single round with 4 functioning buttons: rock, scissors, paper, 
 TODO--2. add hand animation to screen for player and computer. outputs winner to console.
 
 
+
+
+
 __CURRENT____
 
 
@@ -75,6 +78,7 @@ possible--TODO 14 --Add movement of arms on rock scissors paper
 
 
 *TODO--15. Responsive mobile version. Test on phone . 
+TODO--16. Remove any unneeded files 
 
 
 
