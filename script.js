@@ -67,6 +67,9 @@ function loadIntro() {
   document.querySelector('.credit-text').classList.remove('fade-out');
   document.querySelector('.credit-text').textContent = "PRESS ENTER TO SKIP";
   
+  // Set up for touch screens
+  document.addEventListener('touch', skipIntroTouch);
+
   // Set delay timer while text writes to screen
   const delayTimer = setTimeout(initializeGame, 14000);
 
@@ -83,6 +86,14 @@ function loadIntro() {
       initializeGame();
     }
   
+  }
+
+  function skipIntroTouch(){
+      introText = "";
+      clearTimeout(delayTimer);
+      // Kill event listener
+      document.removeEventListener('touch', skipIntroTouch);
+      initializeGame();
   }
 
   // Start typewriter story 
@@ -688,7 +699,7 @@ function startOnTouch() {
 
   // Hide 'insert coin'
   document.querySelector('.credit-text').classList.add('fade-out');
-  document.removeEventListener('keydown',startOnEnter);
+  document.removeEventListener('touch', startOnTouch);
 
   // Display credits
   document.querySelector('.credit-display').textContent = `${NUMBER_CREDITS} CREDIT`;
@@ -757,7 +768,6 @@ window.onload = loadTitleScreen;
 document.addEventListener('keydown', startOnEnter);
 // Event listener for touch screen
 document.addEventListener('touch', startOnTouch);
-
 
 
  // Add event listener to music button
