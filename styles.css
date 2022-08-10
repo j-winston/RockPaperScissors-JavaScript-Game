@@ -97,7 +97,7 @@ img {
     display:flex;
     justify-content: center;
     gap:30px;
-    margin-top: 5%;
+    margin-top: 2%;
 
     
 }
@@ -107,7 +107,8 @@ img {
     display:flex;
     justify-content: center;
     visibility:hidden;
-    margin-top:2vh;
+    margin-top:1vh;
+    margin-bottom: 1vh;
 }
 
 
@@ -395,8 +396,8 @@ img {
 .toggle-music {
     color:white;
     font-size:4vw;
-    margin-top: 4%;
-    margin-left: 50%;
+    margin-top: 2%;
+    margin-left: 75%;
     opacity:.3;
     
 }
