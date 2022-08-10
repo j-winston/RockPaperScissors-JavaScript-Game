@@ -538,19 +538,25 @@ function jukeBox(){
   
   function toggle(){
     const elClassList = this.classList;
-    // Toggle music on
+    // Toggle sounds on
     if(elClassList.contains('fa-volume-xmark')){
         elClassList.remove('fa-volume-xmark');
         elClassList.add('fa-volume-high');
         
         elAudio.play(); //  play on click for first time due to autoplay policy
         elAudio.muted = false;
+        // Unmute sound effects
+        effectsBox.unMute();
 
-      // Toggle music off
+      // Toggle sounds off
     } else {
       elClassList.remove('fa-volume-high');
       elClassList.add('fa-volume-xmark');
       elAudio.muted = true;
+
+      // Mute sound effects
+      effectsBox.mute();
+
       
     }
   }
@@ -676,6 +682,8 @@ function startOnEnter(e) {
 function sfxBox(){
   const elSfx = document.createElement("audio");
   elSfx.setAttribute("preload", "auto");
+  let muteToggle = false;
+  elSfx.muted = true;
 
 
   function playThud() {
@@ -699,10 +707,15 @@ function sfxBox(){
     elSfx.pause();
   }
 
+  function mute() {
+    elSfx.muted = true;
+  }
 
+  function unMute() {
+    elSfx.muted = false;
+  }
 
-
-  return {playThud, playSelect, playBringIt}
+  return {playThud, playSelect, playBringIt, mute, unMute}
 }
 
 
