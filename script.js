@@ -687,7 +687,6 @@ function startOnEnter(e) {
     // delay time to play sound
     setTimeout(loadIntro, 850);
     
-
   }
 }
 
