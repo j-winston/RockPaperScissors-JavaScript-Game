@@ -3,6 +3,7 @@
 let stillPlaying = true;
 let TIME_LIMIT = 35;
 let NUMBER_CREDITS = 0;
+let MOBILE = false;
 
 
 // Used to kill timer later on
@@ -65,6 +66,11 @@ function loadIntro() {
   // Set up enter key and give option to skip text
   document.addEventListener('keydown', skipIntro);
   document.querySelector('.credit-text').classList.remove('fade-out');
+
+  if(MOBILE){
+    document.querySelector('.credit-text').textContent = "TOUCH TO SKIP";
+  }
+
   document.querySelector('.credit-text').textContent = "PRESS ENTER TO SKIP";
   
   // Set up for touch screens
@@ -471,6 +477,16 @@ function playAgain() {
     }
   });
 
+  if(MOBILE){
+    const mesg = "TOUCH TO CONTINUE";
+    document.querySelector('.game-subtext').textContent = mesg;
+    document.addEventListener('touchend', ()=> {
+      initializeGame();
+    });
+    document.removeEventListener('touchend', ()=> { initializeGame();})
+
+  }
+
 }
 
 
@@ -752,16 +768,19 @@ function sfxBox(){
 
 // MAIN
 
-// If mobile device, change up the UI 
+// If mobile device, shrink down UI
 if (window.matchMedia("(max-width: 400px)").matches) {
+  MOBILE = true;
+}
+
+if (MOBILE){
   document.querySelector('.rock-button').textContent = "R";
   document.querySelector('.paper-button').textContent = "P";
   document.querySelector('.scissors-button').textContent = "S";
   document.querySelector('.strike-button').textContent = "GO!";
+
+  document.querySelector('.credit-text').textContent = "TOUCH TO START";
 }
-
-
-
 
 // Start audio engine 
 const musicBox = jukeBox();
