@@ -752,6 +752,18 @@ function sfxBox(){
 
 // MAIN
 
+// If mobile device, change up the UI 
+if (window.matchMedia("(max-width: 400px)").matches) {
+  alert('mobile');
+  document.querySelector('.rock-button').textContent = "R";
+  document.querySelector('.paper-button').textContent = "P";
+  document.querySelector('.scissors-button').textContent = "S";
+  document.querySelector('.strike-button').textContent = "GO!";
+}
+
+
+
+
 // Start audio engine 
 const musicBox = jukeBox();
 musicBox.addNewSongs(songList);
