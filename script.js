@@ -772,7 +772,10 @@ function sfxBox(){
 // If mobile device, shrink down UI
 if (window.matchMedia('(max-width: 400px)').matches) {
   MOBILE = true;
+  alert('mobile')
 }
+
+
 
 if (MOBILE){
   document.querySelector('.rock-button').textContent = "R";
