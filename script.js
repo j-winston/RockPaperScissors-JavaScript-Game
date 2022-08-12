@@ -416,6 +416,7 @@ function showActiveButton(e) {
     const prevItem = document.querySelector(".active-item");
     prevItem.classList.remove("active-item");
   }
+  // Highlight the button that's pressed 
   const activeId = e.target.id;
   const activeButton = document.getElementById(activeId);
   activeButton.classList.add("active-item");
