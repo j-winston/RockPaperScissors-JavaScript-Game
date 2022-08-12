@@ -772,24 +772,15 @@ function sfxBox(){
 // If mobile device, shrink down UI
 if (window.matchMedia('(max-width: 400px)').matches) {
   MOBILE = true;
-  alert('mobile');
-
-}
-
-if(window.innerWidth < 400){
-  MOBILE = true;
-}
-
-
-
-if (MOBILE){
   document.querySelector('.rock-button').textContent = "R";
   document.querySelector('.paper-button').textContent = "P";
   document.querySelector('.scissors-button').textContent = "S";
   document.querySelector('.strike-button').textContent = "GO!";
 
   document.querySelector('.credit-text').textContent = "TOUCH TO START";
+
 }
+
 
 // Start audio engine 
 const musicBox = jukeBox();
