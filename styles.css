@@ -411,7 +411,7 @@ img {
 }
 
 /* Media Queries */
-@media screen and (max-width:400px){
+@media (max-width:400px){
 
      .player-life-unit { 
         height: 2vh;
