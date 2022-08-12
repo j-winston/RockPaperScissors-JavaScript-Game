@@ -71,7 +71,7 @@ function loadIntro() {
     document.querySelector('.credit-text').textContent = "ENTER/TOUCH TO SKIP";
   }
 
-  document.querySelector('.credit-text').textContent = "PRESS ENTER TO SKIP";
+  document.querySelector('.credit-text').textContent = "TOUCH/PRESS ENTER TO SKIP";
   
   // Set up for touch screens
   document.addEventListener('touchend', skipIntroTouch);
