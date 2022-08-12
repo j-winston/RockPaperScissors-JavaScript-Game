@@ -131,7 +131,7 @@ function loadIntro() {
 
 function changeBackground(stage){
   const elBackground = document.querySelector(".background");
-  elBackground.style.backgroundImage = `url("${backgrounds[stage]}")`;
+  elBackground.style.backgroundImage = `url("Double-Dragon-Rock-Scissors-Paper/${backgrounds[stage]}")`;
 }
 
 

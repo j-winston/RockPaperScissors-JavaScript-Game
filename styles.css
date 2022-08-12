@@ -29,7 +29,7 @@ body {
     height: 3vh;
 }
 .background {
-    background-image: url("assets/images/double-dragon-intro.png"); 
+    background-image: url("./assets/images/double-dragon-intro.png"); 
     background-repeat: contain;
     background-color: black;
     
@@ -38,7 +38,7 @@ body {
 
 
 .dither-background {
-    background-image: url("assets/images/double-dragon-garage.png")
+    background-image: url("./assets/images/double-dragon-garage.png")
 }
 
 
@@ -373,7 +373,7 @@ img {
 
 
 .garage-background {
-    background-image:  url("assets/images/double-dragon-garage.png");
+    background-image:  url("./assets/images/double-dragon-garage.png");
     background-size:contain;
     background-repeat: no-repeat;
     background-color: black;
@@ -385,8 +385,8 @@ img {
 
 @font-face {
     font-family:'dePixel';
-    src: url('assets/Fonts/DePixelHalbfett.ttf') format('woff2');
-    src: url('assets/Fonts/DePixelHalbfett.ttf') format('woff');
+    src: url('./assets/Fonts/DePixelHalbfett.ttf') format('woff2');
+    src: url('./assets/Fonts/DePixelHalbfett.ttf') format('woff');
 
 }
 
