@@ -442,6 +442,7 @@ img {
         display:flex;
         flex-direction: column;
         max-width: 90vw;
+        height: auto;
         margin-left: auto;
         margin-right: auto;
         border: 1px solid rgb(255, 255, 255); 

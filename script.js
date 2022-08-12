@@ -772,7 +772,12 @@ function sfxBox(){
 // If mobile device, shrink down UI
 if (window.matchMedia('(max-width: 400px)').matches) {
   MOBILE = true;
-  alert('mobile')
+  alert('mobile');
+
+}
+
+if(window.innerWidth < 400){
+  MOBILE = true;
 }
 
 
