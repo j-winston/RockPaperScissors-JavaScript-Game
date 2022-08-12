@@ -68,7 +68,7 @@ function loadIntro() {
   document.querySelector('.credit-text').classList.remove('fade-out');
 
   if(MOBILE){
-    document.querySelector('.credit-text').textContent = "TOUCH TO SKIP";
+    document.querySelector('.credit-text').textContent = "ENTER/TOUCH TO SKIP";
   }
 
   document.querySelector('.credit-text').textContent = "PRESS ENTER TO SKIP";
@@ -769,17 +769,13 @@ function sfxBox(){
 
 // MAIN
 
-// If mobile device, shrink down UI
-if (window.matchMedia('(max-width: 400px)').matches) {
-  MOBILE = true;
+MOBILE = true;
   document.querySelector('.rock-button').textContent = "R";
   document.querySelector('.paper-button').textContent = "P";
   document.querySelector('.scissors-button').textContent = "S";
   document.querySelector('.strike-button').textContent = "GO!";
+  document.querySelector('.credit-text').textContent = "ENTER/TOUCH TO START";
 
-  document.querySelector('.credit-text').textContent = "TOUCH TO START";
-
-}
 
 
 // Start audio engine 

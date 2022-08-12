@@ -410,25 +410,10 @@ img {
     transform: scale(.97);
 }
 
+
 /* Media Queries */
 @media (max-width:400px){
 
-     .player-life-unit { 
-        height: 2vh;
-        min-width:4vw; 
-        border: solid white 2px;
-        background-color: blue;
-    }
-    
-
-    .cpu-life-unit { 
-        height: 2vh;
-        min-width:4vw; 
-        border: solid white 2px;
-        background-color: red;
-    }
-    
-   
     /* Increase size of hands */
     .computer-hand,
     .player-hand {
