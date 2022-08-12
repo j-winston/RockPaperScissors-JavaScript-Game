@@ -201,8 +201,8 @@ function initializeGame() {
   // Give each player 5 bars of life
   generateLifeBars();
 
-  // Reveal main background
-  document.querySelector(".background").classList.add('garage-background');
+  // Show main background
+  changeBackground('game');
 
   // Reveal life bars
   document.querySelector(".life-container").classList.add("fade-in");
