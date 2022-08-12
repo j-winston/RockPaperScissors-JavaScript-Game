@@ -773,7 +773,7 @@ if (window.matchMedia("(max-width: 400px)").matches) {
   MOBILE = true;
 }
 
-if (MOBILE){
+if (true){
   document.querySelector('.rock-button').textContent = "R";
   document.querySelector('.paper-button').textContent = "P";
   document.querySelector('.scissors-button').textContent = "S";
