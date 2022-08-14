@@ -1,7 +1,7 @@
 
 // Globals 
 let stillPlaying = true;
-let TIME_LIMIT = 400;
+let TIME_LIMIT = 30;
 let NUMBER_CREDITS = 0;
 let MOBILE = false;
 
