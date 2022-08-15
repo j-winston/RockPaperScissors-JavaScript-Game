@@ -63,22 +63,18 @@ function loadIntro() {
   musicBox.playRange(audioRange['intro-screen']);
   changeBackground('intro');
 
+  // Set delay timer while text writes to screen
+  const delayTimer = setTimeout(initializeGame, 14000);
+
   // Set up enter key and give option to skip text
   document.addEventListener('keydown', skipIntro);
   document.querySelector('.credit-text').classList.remove('fade-out');
-
-  if(MOBILE){
-    document.querySelector('.credit-text').textContent = "ENTER/TOUCH TO SKIP";
-  }
 
   document.querySelector('.credit-text').textContent = "TOUCH/PRESS ENTER TO SKIP";
   
   // Event listener for touch screen on main game window
   const gameWindow = document.querySelector('#main-container');
   gameWindow.addEventListener('touchend', skipIntroTouch);
-
-  // Set delay timer while text writes to screen
-  const delayTimer = setTimeout(initializeGame, 14000);
 
   // Fade-in blue garage background
   document.querySelector(".background").classList.add("fade-in");
@@ -99,7 +95,7 @@ function loadIntro() {
       introText = "";
       clearTimeout(delayTimer);
       // Kill event listener
-      document.removeEventListener('touchend', skipIntroTouch);
+      gameWindow.removeEventListener('touchend', skipIntroTouch);
       initializeGame();
   }
 
@@ -125,9 +121,6 @@ function loadIntro() {
     }
     
 }
-
-
-
 
 
 function changeBackground(stage){
@@ -710,13 +703,15 @@ function startOnTouch() {
 
   // Hide 'insert coin'
   document.querySelector('.credit-text').classList.add('fade-out');
-  document.removeEventListener('touchend', startOnTouch);
+
+  // Kill touch listener
+  gameWindow.removeEventListener('touchend', startOnTouch);
 
   // Display credits
   document.querySelector('.credit-display').textContent = `${NUMBER_CREDITS} CREDIT`;
 
   // delay time to play sound
-  setTimeout(loadIntro, 850);
+  setTimeout(loadIntro, 500);
 
   }
 
