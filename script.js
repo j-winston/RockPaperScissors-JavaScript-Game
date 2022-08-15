@@ -73,14 +73,15 @@ function loadIntro() {
 
   document.querySelector('.credit-text').textContent = "TOUCH/PRESS ENTER TO SKIP";
   
-  // Set up for touch screens
-  document.addEventListener('touchend', skipIntroTouch);
+  // Event listener for touch screen on main game window
+  const gameWindow = document.querySelector('#main-container');
+  gameWindow.addEventListener('touchend', skipIntroTouch);
 
   // Set delay timer while text writes to screen
   const delayTimer = setTimeout(initializeGame, 14000);
 
-    // Fade-in blue garage background
-    document.querySelector(".background").classList.add("fade-in");
+  // Fade-in blue garage background
+  document.querySelector(".background").classList.add("fade-in");
 
   // Skip text story if user desires 
   function skipIntro(e){
@@ -133,9 +134,6 @@ function changeBackground(stage){
   const elBackground = document.querySelector(".background");
   elBackground.style.backgroundImage = `url("./${backgrounds[stage]}")`;
 }
-
-
-
 
 
 function initializeGame() {
@@ -228,11 +226,8 @@ function initializeGame() {
   // Start timer 
   CountDownTimer(TIME_LIMIT);
 
-
-
   // Start stage music 
   musicBox.playRange(audioRange['action-screen']);
-
 
 }
 
@@ -791,9 +786,10 @@ window.onload = loadTitleScreen;
 
 // Event listener for Enter
 document.addEventListener('keydown', startOnEnter);
-// Event listener for touch screen
-document.addEventListener('touchend', startOnTouch);
 
+// Event listener for touch screen on main game window
+const gameWindow = document.querySelector('#main-container');
+gameWindow.addEventListener('touchend', startOnTouch);
 
  // Add event listener to music button
  const elMusicToggle = document.querySelector('.toggle-music');
