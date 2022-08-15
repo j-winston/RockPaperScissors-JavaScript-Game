@@ -130,12 +130,16 @@ function changeBackground(stage){
 
 
 function initializeGame() {
+
   // Reset game loop 
   stillPlaying = true;
 
   // Kill main game timer  
   killTimer(gameTimer);
 
+  // Kill touch listener
+  gameWindow.removeEventListener('touchend', initializeGame);
+  
   // Reset both hands to rock 
   changeComputerHand('rock');
   changePlayerHand('rock');
@@ -221,6 +225,8 @@ function initializeGame() {
 
   // Start stage music 
   musicBox.playRange(audioRange['action-screen']);
+
+  
 
 }
 
@@ -438,19 +444,16 @@ function displayWinner(winningPlayer) {
    // Gray out background and disable buttons
    deactivateInterface();
    killTimer(gameTimer);
-
-
-  
-
-
   
   // Give option to continue
   playAgain();
 }
 
-
+// Here's where the problem lies..due to anonymous function so kill anonymnous function
 function playAgain() {
   const mesg = "Hit Y to continue, Q to quit";
+  
+
   document.querySelector('.game-subtext').textContent = mesg;
 
   // Get user input 
@@ -469,10 +472,7 @@ function playAgain() {
   if(MOBILE){
     const mesg = "TOUCH TO CONTINUE";
     document.querySelector('.game-subtext').textContent = mesg;
-    document.addEventListener('touchend', ()=> {
-      initializeGame();
-    });
-    document.removeEventListener('touchend', ()=> { initializeGame();})
+    gameWindow.addEventListener('touchend', initializeGame);
 
   }
 
@@ -523,6 +523,13 @@ function deactivateInterface() {
 
     // Update credits
   document.querySelector(".credit-display").textContent = `${NUMBER_CREDITS} CREDITS`;
+  
+  // Kill event listener
+  gameWindow.removeEventListener('touchend', ()=> { introGameStart();})
+
+
+  
+
 
 
 }
