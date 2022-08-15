@@ -704,7 +704,7 @@ function startOnTouch() {
   // Hide 'insert coin'
   document.querySelector('.credit-text').classList.add('fade-out');
 
-  // Kill touch listener
+  // Kill touch event listener to avoid repeat starts
   gameWindow.removeEventListener('touchend', startOnTouch);
 
   // Display credits
