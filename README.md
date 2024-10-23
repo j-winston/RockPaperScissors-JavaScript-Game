@@ -25,6 +25,8 @@ Remember the arcade hit, Double Dragon? Here’s a rock-paper-scissors version i
 ![Screenshot from 2022-08-15 16-21-46](https://user-images.githubusercontent.com/102254727/184712069-eeec02cd-73e4-451a-bb7f-53232ad889ae.png)
 ![Screenshot from 2022-08-15 16-22-15](https://user-images.githubusercontent.com/102254727/184712079-e658fc0b-00cf-4a85-a00a-ae9c6fcb0eea.png)
 
+---
+
 ## Technologies Used
 
 - **Vanilla JavaScript**: Core game logic.
