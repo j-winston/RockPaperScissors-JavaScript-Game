@@ -67,7 +67,15 @@ cd RockPaperScissors-JavaScript-Game
 ### 3. Open index.html File 
 To run the game locally, open the index.html file directly in your browser.
 
+### 4. Future Potential Improvements 
+* **Add sound** effects to enhance the gaming experience.
+* Implement a **multiplayer mode** for users to play against each other.
+* Add more **difficulty levels** to challenge the player.
+* Include additional **characters** and **moves** to expand the gameplay options.
 
+
+### 5. Inspiration
+The **Double Dragon** arcade game inspired this project. The idea was to merge a nostalgic game aesthetic with a fun web-based game like rock-paper-scissors. 
 
 
 
