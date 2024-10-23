@@ -78,4 +78,7 @@ To run the game locally, open the index.html file directly in your browser.
 The **Double Dragon** arcade game inspired this project. The idea was to merge a nostalgic game aesthetic with a fun web-based game like rock-paper-scissors. 
 
 
+### 6. Contact
+If you have any questions or feedback, feel free to reach out. 
+
 
